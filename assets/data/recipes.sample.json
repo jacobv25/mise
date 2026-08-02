@@ -1,0 +1,329 @@
+[
+  {
+    "id": "crispy-chickpea-bowls-lemony-yogurt",
+    "title": "Crispy Chickpea Bowls with Lemony Yogurt (stovetop)",
+    "status": "made",
+    "cuisine": "Mediterranean",
+    "time": "~15 min prep + ~15 min cook",
+    "serves": "2",
+    "source": "adapted from [Warm Chickpea Bowls With Lemony Yogurt — Bon Appétit, Andy Baraghani](https://www.bonappetit.com/recipe/warm-chickpea-bowls-with-lemony-yogurt) (4.8★/110)",
+    "sodiumMg": 120,
+    "proteinG": 20,
+    "calories": 550,
+    "tools": [
+      "stainless skillet",
+      "wooden spoon",
+      "knife + board",
+      "grater (garlic)",
+      "citrus juicer or fork",
+      "can opener",
+      "colander",
+      "2 serving bowls",
+      "garbage bowl",
+      "damp towel under board",
+      "hand towel",
+      "landing plate"
+    ],
+    "bowls": [
+      {
+        "index": 1,
+        "name": "Lemony yogurt",
+        "arrowText": "stirred at step 2, → bowls at step 7",
+        "targetStep": 7,
+        "items": [
+          "¾ cup plain Greek yogurt",
+          "1 Tbsp fresh lemon juice"
+        ]
+      },
+      {
+        "index": 2,
+        "name": "Lemony salad",
+        "arrowText": "tossed at step 2, → on top at step 7",
+        "targetStep": 7,
+        "items": [
+          "½ cucumber, thinly sliced",
+          "a little thin-sliced onion",
+          "big handful chopped parsley",
+          "3 Tbsp fresh lemon juice"
+        ]
+      },
+      {
+        "index": 3,
+        "name": "Chickpeas",
+        "arrowText": "→ pan at step 4",
+        "targetStep": 4,
+        "items": [
+          "1 15-oz can chickpeas (no-salt-added), rinsed and patted very dry"
+        ]
+      },
+      {
+        "index": 4,
+        "name": "Bloom",
+        "arrowText": "→ cleared spot in pan at step 5",
+        "targetStep": 5,
+        "items": [
+          "1 garlic clove, grated",
+          "1½ tsp ground cumin (a little extra stands in for the original's coriander)"
+        ]
+      },
+      {
+        "index": 5,
+        "name": "Kale",
+        "arrowText": "→ pan at step 6",
+        "targetStep": 6,
+        "items": [
+          "1 small bunch kale, stems stripped, torn large"
+        ]
+      }
+    ],
+    "stationExtras": [
+      {
+        "label": "Stove-side",
+        "arrowText": null,
+        "items": [
+          "~3 Tbsp extra-virgin olive oil, divided (2 Tbsp at step 3, a little at step 5, thread to finish)",
+          "lime squeeze to finish",
+          "black pepper"
+        ]
+      }
+    ],
+    "ingredients": [],
+    "steps": [
+      {
+        "number": 1,
+        "text": "**Mise — no heat (~15 min).** Work the bowl map above — everything prepped and beside the stove before heat goes on. **Reset before ignition:** dump the garbage bowl, wash knife & board, wipe the counter. Once the burner clicks on, the knife is done.",
+        "leadIn": "Mise — no heat (~15 min).",
+        "heat": "no heat"
+      },
+      {
+        "number": 2,
+        "text": "**Sauces — no heat (~2 min).** Stir Bowl ① (yogurt + lemon). Toss Bowl ② (cucumber, onion, parsley + lemon).",
+        "leadIn": "Sauces — no heat (~2 min).",
+        "heat": "no heat"
+      },
+      {
+        "number": 3,
+        "text": "**Preheat — MEDIUM-HIGH (~2 min).** Empty stainless pan until a water drop skates; add 2 Tbsp olive oil, swirl to a shimmer.",
+        "leadIn": "Preheat — MEDIUM-HIGH (~2 min).",
+        "heat": "MEDIUM-HIGH"
+      },
+      {
+        "number": 4,
+        "text": "**Crisp the chickpeas — stay on MEDIUM-HIGH (8–10 min).** Bowl ③ in a single layer; leave 2–3 min between stirs. Done when: deep golden, skins splitting, rattly-sounding. *Dead minutes: rinse the colander and board, set out the 2 serving bowls.*",
+        "leadIn": "Crisp the chickpeas — stay on MEDIUM-HIGH (8–10 min).",
+        "heat": "MEDIUM-HIGH"
+      },
+      {
+        "number": 5,
+        "text": "**Bloom — drop to MEDIUM (30–45 sec).** Bowl ④ (cumin + garlic) in a little oil in a cleared spot until fragrant, then stir through (garlic goes in late so it doesn't burn).",
+        "leadIn": "Bloom — drop to MEDIUM (30–45 sec).",
+        "heat": "MEDIUM"
+      },
+      {
+        "number": 6,
+        "text": "**Kale — stay on MEDIUM (2–3 min).** Bowl ⑤ in; toss until wilted with crisp edges. **OFF HEAT**, squeeze of lime.",
+        "leadIn": "Kale — stay on MEDIUM (2–3 min).",
+        "heat": "MEDIUM"
+      },
+      {
+        "number": 7,
+        "text": "**Plate — no heat.** Yogurt down, chickpea-kale over, lemony salad on top, thread of olive oil.",
+        "leadIn": "Plate — no heat.",
+        "heat": "no heat"
+      }
+    ]
+  },
+  {
+    "id": "turkey-marinara-skillet",
+    "title": "Turkey Marinara Skillet (jar-stretch, low-sodium)",
+    "status": "made",
+    "cuisine": "Italian-American",
+    "time": "~10 min prep + ~25 min cook",
+    "serves": "4 (dinner + 3 meal-prep portions)",
+    "source": "Adapted from \"Amazing Ground Turkey Tomato Sauce\" (Allrecipes, 4.6★) — https://www.allrecipes.com/recipe/236982/amazing-ground-turkey-tomato-sauce/",
+    "sodiumMg": 380,
+    "proteinG": 30,
+    "calories": 480,
+    "tools": [
+      "stainless skillet (large) or pot",
+      "wooden spoon",
+      "knife + board",
+      "can opener",
+      "4 meal-prep containers",
+      "garbage bowl",
+      "damp towel under board",
+      "hand towel",
+      "landing plate"
+    ],
+    "bowls": [
+      {
+        "index": 1,
+        "name": "Sofrito",
+        "arrowText": "→ pan at step 5",
+        "targetStep": 5,
+        "items": [
+          "½ yellow onion, chopped",
+          "2 garlic cloves, minced"
+        ]
+      },
+      {
+        "index": 2,
+        "name": "Spices",
+        "arrowText": "→ pan at step 5, on the aromatics",
+        "targetStep": 5,
+        "items": [
+          "1 tsp dried oregano",
+          "¼ tsp chili flakes",
+          "generous black pepper"
+        ]
+      },
+      {
+        "index": 3,
+        "name": "Tomatoes",
+        "arrowText": "→ pan at step 6",
+        "targetStep": 6,
+        "items": [
+          "1 cup jarred marinara (the open jar — measure it, don't pour free)",
+          "1 can (14.5 oz) no-salt-added tomatoes, hand-crushed"
+        ]
+      },
+      {
+        "index": 4,
+        "name": "Finish",
+        "arrowText": "→ plating, step 9",
+        "targetStep": 9,
+        "items": [
+          "2 tbsp part-skim ricotta per bowl",
+          "2 tbsp chopped parsley",
+          "splash balsamic (the balance move, step 8)"
+        ]
+      }
+    ],
+    "stationExtras": [
+      {
+        "label": "Stove-side",
+        "arrowText": null,
+        "items": [
+          "1½ tbsp olive oil",
+          "1 lb 93% ground turkey (straight from fridge pack)",
+          "the cooked pasta + a splash of water to loosen"
+        ]
+      }
+    ],
+    "ingredients": [],
+    "steps": [
+      {
+        "number": 1,
+        "text": "**Mise — set the station (no heat, ~2 min).** Garbage bowl, damp towel under board, hand towel, landing plate. Read the steps through. Once the burner clicks on, the knife is done.",
+        "leadIn": "Mise — set the station (no heat, ~2 min).",
+        "heat": "no heat"
+      },
+      {
+        "number": 2,
+        "text": "**Mise — fill the bowls (no heat, ~8 min).** Work the map above; line bowls up ① → ④. **Reset before ignition:** dump garbage bowl, wash knife & board, wipe counter.",
+        "leadIn": "Mise — fill the bowls (no heat, ~8 min).",
+        "heat": "no heat"
+      },
+      {
+        "number": 3,
+        "text": "**Preheat — MEDIUM-HIGH, empty stainless pan, 2–3 min.** Water-drop test: bead-and-skitter. Add the olive oil, wait for a full shimmer. *Dead minute: fill the sink with hot soapy water.*",
+        "leadIn": "Preheat — MEDIUM-HIGH, empty stainless pan, 2–3 min.",
+        "heat": "MEDIUM-HIGH"
+      },
+      {
+        "number": 4,
+        "text": "**Brown the turkey — stay on MEDIUM-HIGH, ~5–6 min.** Add the turkey and press it into one flat layer with the spoon — then **don't touch for 3–4 min**. You want a deep brown crust underneath (that's fond forming — flavor, not burning). Then crumble into bite-size pieces and cook 2 min more. Done when: no pink, brown crusty bits on the pan bottom.",
+        "leadIn": "Brown the turkey — stay on MEDIUM-HIGH, ~5–6 min.",
+        "heat": "MEDIUM-HIGH"
+      },
+      {
+        "number": 5,
+        "text": "**Aromatics — drop to MEDIUM, ~3–4 min.** Onion into the turkey, stir until it softens and picks up color. Garlic + the spice bowl in, stir 30–60 sec until fragrant — not brown.",
+        "leadIn": "Aromatics — drop to MEDIUM, ~3–4 min.",
+        "heat": "MEDIUM"
+      },
+      {
+        "number": 6,
+        "text": "**Tomatoes — stay on MEDIUM to a bubble, then MEDIUM-LOW, 15 min.** Pour in bowl ③, scrape the fond up off the bottom (it dissolves into the sauce). Lazy simmer, lid off, stirring occasionally, until it thickens to spoon-track. *Dead minutes: wash the board & spoon rest, set out meal-prep containers.*",
+        "leadIn": "Tomatoes — stay on MEDIUM to a bubble, then MEDIUM-LOW, 15 min.",
+        "heat": "MEDIUM"
+      },
+      {
+        "number": 7,
+        "text": "**Pasta in — stay on MEDIUM-LOW, ~2 min.** Fold the cooked pasta in with a splash of water to loosen; toss until the pasta is hot and glossed with sauce.",
+        "leadIn": "Pasta in — stay on MEDIUM-LOW, ~2 min.",
+        "heat": "MEDIUM-LOW"
+      },
+      {
+        "number": 8,
+        "text": "**Balance — OFF HEAT.** Taste. Flat? A small splash of balsamic and a grind of pepper — never salt; the jar already brought it.",
+        "leadIn": "Balance — OFF HEAT.",
+        "heat": "OFF HEAT"
+      },
+      {
+        "number": 9,
+        "text": "**Plate.** Shallow bowl, mound high in the center. One dollop (2 tbsp) ricotta on top — don't stir it in, let it melt streaky. Parsley from height, wipe the rim. Remaining 3 portions into containers (fridge 3–4 days; the sauce alone also freezes well).",
+        "leadIn": "Plate.",
+        "heat": null
+      }
+    ]
+  },
+  {
+    "id": "mediterranean-lentil-soup",
+    "title": "Mediterranean Lentil Soup (batch — plant-protein lunches)",
+    "status": "to-try",
+    "cuisine": "Mediterranean",
+    "time": "15 min prep + 45 min simmer",
+    "serves": "7 (1½-cup servings)",
+    "source": "adapted from https://www.budgetbytes.com/mediterranean-lentil-soup/ (4.7★)",
+    "sodiumMg": 110,
+    "proteinG": 9,
+    "calories": 185,
+    "tools": [],
+    "bowls": [],
+    "stationExtras": [],
+    "ingredients": [
+      "2 Tbsp olive oil",
+      "1 large onion + 2 carrots + 3 celery stalks, diced small (or bell pepper + extra onion)",
+      "5 cloves garlic, crushed",
+      "2 tsp cumin · 1 tsp cinnamon · plenty of black pepper — no salt",
+      "1 cup dried brown/green lentils (pantry ✓), rinsed",
+      "4 cups water + 4 cups low-sodium vegetable broth",
+      "~½ cup lemon juice (2–3 lemons)",
+      "3 cups chopped kale",
+      "To serve: Greek yogurt dollop, extra lemon"
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "text": "Rinse lentils until water runs clear.",
+        "leadIn": null,
+        "heat": null
+      },
+      {
+        "number": 2,
+        "text": "Sweat onion/carrot/celery in oil over medium-high, 6–7 min (skill: aromatics without burning).",
+        "leadIn": null,
+        "heat": null
+      },
+      {
+        "number": 3,
+        "text": "Stir in garlic, cumin, cinnamon — 60 seconds until fragrant. Add lentils, toast 1–2 min.",
+        "leadIn": null,
+        "heat": null
+      },
+      {
+        "number": 4,
+        "text": "Add liquid + lemon juice; boil, then simmer low **30–45 min** until lentils are tender.",
+        "leadIn": null,
+        "heat": null
+      },
+      {
+        "number": 5,
+        "text": "Stir in kale to wilt. Taste: brighten with more lemon + pepper, not salt.",
+        "leadIn": null,
+        "heat": null
+      }
+    ]
+  }
+]

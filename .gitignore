@@ -41,3 +41,6 @@ example
 # generated native folders
 /ios
 /android
+
+# app data — real export from ~/cooking; commit only recipes.sample.json
+assets/data/recipes.json
