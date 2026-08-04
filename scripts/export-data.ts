@@ -23,21 +23,20 @@ const DATA_DIR = path.resolve(__dirname, '..', 'assets', 'data');
 const OUT_FILE = path.join(DATA_DIR, 'recipes.json');
 const PANTRY_OUT_FILE = path.join(DATA_DIR, 'pantry.json');
 
-// Belt-and-suspenders on top of the parser's allowlist extraction: phrases
-// that only occur in personal/health sections must never reach the export.
-// The repo is expected to go public.
-const FORBIDDEN_MARKERS = [
-  'personal-notes',
-  'dietary-profile',
-  'Biggest sodium source',
+// Belt-and-suspenders on top of the parsers' allowlist extraction: phrases
+// that only occur in the workspace's private sections must never reach the
+// export. This repo is public, so the more specific vocabulary lives in an
+// untracked local extension file rather than in source.
+const LOCAL_MARKERS_FILE = path.join(__dirname, 'privacy-markers.local.json');
+const FORBIDDEN_MARKERS: string[] = [
+  'Personal notes',
   'How it went',
   'Tweak next time',
-  // Health vocabulary that only appears in medical rationale — if one of
-  // these shows up, a recipe is carrying health context in an exported
-  // section (it belongs in the personal-notes notes line instead).
-  '[redacted]',
-  '[redacted]',
-  '[redacted]',
+  'Biggest sodium source',
+  'dietary-profile',
+  ...(fs.existsSync(LOCAL_MARKERS_FILE)
+    ? (JSON.parse(fs.readFileSync(LOCAL_MARKERS_FILE, 'utf8')) as string[])
+    : []),
 ];
 
 function readDir(status: RecipeStatus): { recipes: Recipe[]; warnings: string[] } {

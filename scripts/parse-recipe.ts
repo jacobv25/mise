@@ -12,9 +12,9 @@
  *    step lead-in (plus lowercase "no heat").
  *
  * Pure function, no filesystem access — `export-data.ts` does the I/O.
- * Personal/health content (Personal notes, personal-notes lines, sodium
- * rationale) is excluded by construction: this parser only extracts an
- * allowlist of fields and never copies whole sections through.
+ * Content from the workspace's personal sections is excluded by
+ * construction: this parser only extracts an allowlist of fields and
+ * never copies whole sections through.
  */
 
 import type { Bowl, Recipe, RecipeStatus, StationExtra, Step } from '../src/types/recipe';

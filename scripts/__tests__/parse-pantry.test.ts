@@ -32,8 +32,8 @@ _Last updated: yesterday_
 - **Leftover stew, 3 banked portions** (made recently, fridge — this week's lunches; reheat gently)
 
 ## Freezer
-- **Ham hock ×1** ⏰ — ⚠️ cured/smoked = serious sodium. The personal-notes-safe play: one hock in a big pot.
-- Chocolate ice cream ⚠️ chocolate = [redacted] + sat fat — small-bowl treat
+- **Ham hock ×1** ⏰ — ⚠️ cured/smoked = serious sodium. The sanctioned play: one hock in a big pot.
+- Chocolate ice cream ⚠️ chocolate = rich + sat fat — small-bowl treat
 
 ## Running shopping list
 - [ ] Corn tortillas, lowest-sodium brand
@@ -90,10 +90,10 @@ describe('parsePantry', () => {
     expect(hock!.warn).toBe(true);
   });
 
-  test('privacy: health prose never reaches the output', () => {
+  test('privacy: annotation prose never reaches the output', () => {
     const json = JSON.stringify(sections);
-    expect(json).not.toContain('[redacted]');
-    expect(json).not.toContain('[redacted]');
+    expect(json).not.toContain('sanctioned');
+    expect(json).not.toContain('rich +');
     expect(json).not.toContain('sat fat');
   });
 });

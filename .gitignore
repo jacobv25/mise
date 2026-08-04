@@ -45,3 +45,7 @@ example
 # app data — real export from ~/cooking; commit only recipes.sample.json
 assets/data/recipes.json
 assets/data/pantry.json
+
+# session-local files — agent coordination + sensitive guard vocabulary
+HANDOFF.md
+scripts/privacy-markers.local.json

@@ -14,7 +14,7 @@ const MADE_RECIPE = `# Test Skillet (jar-stretch, low-sodium)
 ## Nutrition (per serving — required)
 - **Sodium:** ~380 mg (1,352 as written!)   **Protein:** ~30 g   **Calories:** ~480
 - _Biggest sodium source & how it's kept low:_ The jarred marinara (~880 mg/cup).
-- _personal-notes notes:_ lean turkey, olive oil.
+- _Health notes:_ private dietary rationale that must never be exported.
 
 ## Mise en place (bowls · tools · amounts — the whole station in one view)
 **Tools & station:** stainless skillet (large) · wooden spoon · knife + board ·
@@ -39,7 +39,7 @@ const MADE_RECIPE = `# Test Skillet (jar-stretch, low-sodium)
 - **How it went:** secret diary content that must never be exported.
 - **Rating:** ★★★★ / 5
 
-<!-- Passes dietary-profile.md checklist. [redacted] note in a comment. -->
+<!-- Passes dietary-profile.md checklist. private note in a comment. -->
 `;
 
 const TO_TRY_RECIPE = `# Lentil Soup (batch)
@@ -134,9 +134,10 @@ describe('parseRecipe — made recipe with mise bowls', () => {
     expect(warnings).toEqual([]);
   });
 
-  test('privacy: personal/health content never reaches the output', () => {
+  test('privacy: personal-section content never reaches the output', () => {
     const json = JSON.stringify(recipe);
-    expect(json).not.toContain('[redacted]');
+    expect(json).not.toContain('Health notes');
+    expect(json).not.toContain('private dietary rationale');
     expect(json).not.toContain('secret diary');
     expect(json).not.toContain('Biggest sodium source');
     expect(json).not.toContain('dietary-profile');
