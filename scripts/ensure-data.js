@@ -9,10 +9,12 @@ const fs = require('fs');
 const path = require('path');
 
 const dataDir = path.join(__dirname, '..', 'assets', 'data');
-const real = path.join(dataDir, 'recipes.json');
-const sample = path.join(dataDir, 'recipes.sample.json');
 
-if (!fs.existsSync(real)) {
-  fs.copyFileSync(sample, real);
-  console.log('assets/data/recipes.json seeded from sample dataset');
+for (const name of ['recipes', 'pantry']) {
+  const real = path.join(dataDir, `${name}.json`);
+  const sample = path.join(dataDir, `${name}.sample.json`);
+  if (!fs.existsSync(real)) {
+    fs.copyFileSync(sample, real);
+    console.log(`assets/data/${name}.json seeded from sample dataset`);
+  }
 }

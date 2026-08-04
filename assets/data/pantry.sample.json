@@ -1,0 +1,142 @@
+[
+  {
+    "title": "Use first",
+    "items": [
+      {
+        "name": "Zucchini ×1",
+        "warn": false,
+        "useFirst": true
+      },
+      {
+        "name": "Frozen chicken breasts",
+        "warn": false,
+        "useFirst": true
+      }
+    ]
+  },
+  {
+    "title": "Staples",
+    "items": [
+      {
+        "name": "Olive oil (extra-virgin)",
+        "warn": false,
+        "useFirst": false
+      },
+      {
+        "name": "Vinegars: red-wine, balsamic, white-wine",
+        "warn": false,
+        "useFirst": false
+      },
+      {
+        "name": "Wine",
+        "warn": false,
+        "useFirst": false
+      },
+      {
+        "name": "Dijon mustard (new)",
+        "warn": true,
+        "useFirst": false
+      },
+      {
+        "name": "Ketchup",
+        "warn": true,
+        "useFirst": false
+      }
+    ]
+  },
+  {
+    "title": "Spices & flavor",
+    "items": [
+      {
+        "name": "Ground cumin",
+        "warn": false,
+        "useFirst": false
+      },
+      {
+        "name": "smoked paprika",
+        "warn": false,
+        "useFirst": false
+      },
+      {
+        "name": "dried oregano",
+        "warn": false,
+        "useFirst": false
+      },
+      {
+        "name": "ground coriander",
+        "warn": false,
+        "useFirst": false
+      }
+    ]
+  },
+  {
+    "title": "Herbs",
+    "items": [
+      {
+        "name": "Basil plant",
+        "warn": false,
+        "useFirst": false
+      },
+      {
+        "name": "Mint plant",
+        "warn": false,
+        "useFirst": false
+      }
+    ]
+  },
+  {
+    "title": "Fridge · Dairy",
+    "items": [
+      {
+        "name": "Milk (low-fat)",
+        "warn": false,
+        "useFirst": false
+      },
+      {
+        "name": "plain yogurt",
+        "warn": false,
+        "useFirst": false
+      },
+      {
+        "name": "Greek yogurt",
+        "warn": false,
+        "useFirst": false
+      }
+    ]
+  },
+  {
+    "title": "Fridge · Produce",
+    "items": [
+      {
+        "name": "Zucchini ×1",
+        "warn": false,
+        "useFirst": false
+      },
+      {
+        "name": "tomatoes ×4 on-the-vine",
+        "warn": false,
+        "useFirst": false
+      },
+      {
+        "name": "Arugula",
+        "warn": false,
+        "useFirst": false
+      }
+    ]
+  },
+  {
+    "title": "Freezer",
+    "items": [
+      {
+        "name": "Frozen chicken breasts",
+        "warn": false,
+        "useFirst": true
+      },
+      {
+        "name": "Ham hock ×1",
+        "warn": true,
+        "useFirst": true
+      }
+    ]
+  }
+]

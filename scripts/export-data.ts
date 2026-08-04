@@ -15,10 +15,13 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 
 import type { Recipe, RecipeStatus } from '../src/types/recipe';
+import { parsePantry } from './parse-pantry';
 import { parseRecipe } from './parse-recipe';
 
 const COOKING_DIR = process.env.COOKING_DIR ?? path.join(os.homedir(), 'cooking');
-const OUT_FILE = path.resolve(__dirname, '..', 'assets', 'data', 'recipes.json');
+const DATA_DIR = path.resolve(__dirname, '..', 'assets', 'data');
+const OUT_FILE = path.join(DATA_DIR, 'recipes.json');
+const PANTRY_OUT_FILE = path.join(DATA_DIR, 'pantry.json');
 
 // Belt-and-suspenders on top of the parser's allowlist extraction: phrases
 // that only occur in personal/health sections must never reach the export.
@@ -59,9 +62,14 @@ const toTry = readDir('to-try');
 const recipes = [...made.recipes, ...toTry.recipes];
 const warnings = [...made.warnings, ...toTry.warnings];
 
-const json = JSON.stringify(recipes, null, 2) + '\n';
+const pantry = parsePantry(fs.readFileSync(path.join(COOKING_DIR, 'pantry.md'), 'utf8'));
 
-const leaked = FORBIDDEN_MARKERS.filter((marker) => json.includes(marker));
+const json = JSON.stringify(recipes, null, 2) + '\n';
+const pantryJson = JSON.stringify(pantry, null, 2) + '\n';
+
+const leaked = FORBIDDEN_MARKERS.filter(
+  (marker) => json.includes(marker) || pantryJson.includes(marker),
+);
 if (leaked.length > 0) {
   console.error(`PRIVACY GUARD: export contains forbidden content: ${leaked.join(', ')}`);
   process.exit(1);
@@ -73,11 +81,15 @@ if (warnings.length > 0) {
   process.exit(1);
 }
 
-fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
+fs.mkdirSync(DATA_DIR, { recursive: true });
 fs.writeFileSync(OUT_FILE, json);
+fs.writeFileSync(PANTRY_OUT_FILE, pantryJson);
 
 const bowlCount = recipes.reduce((n, r) => n + r.bowls.length, 0);
+const pantryCount = pantry.reduce((n, s) => n + s.items.length, 0);
 console.log(
   `Exported ${made.recipes.length} made + ${toTry.recipes.length} to-try recipes ` +
-    `(${bowlCount} bowls) → ${path.relative(process.cwd(), OUT_FILE)}`,
+    `(${bowlCount} bowls) → ${path.relative(process.cwd(), OUT_FILE)}\n` +
+    `Exported ${pantry.length} pantry sections (${pantryCount} items) → ` +
+    path.relative(process.cwd(), PANTRY_OUT_FILE),
 );
