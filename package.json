@@ -52,8 +52,5 @@
     "export-data": "tsx scripts/export-data.ts",
     "postinstall": "node scripts/ensure-data.js"
   },
-  "private": true,
-  "jest": {
-    "preset": "jest-expo"
-  }
+  "private": true
 }
