@@ -1,3 +1,4 @@
+import { Link } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { NutritionBadge } from '@/components/nutrition-badge';
@@ -8,14 +9,14 @@ import type { Recipe } from '@/types/recipe';
 
 export type RecipeCardProps = {
   recipe: Recipe;
-  onPress?: () => void;
 };
 
-export function RecipeCard({ recipe, onPress }: RecipeCardProps) {
+export function RecipeCard({ recipe }: RecipeCardProps) {
   const subtitle = [recipe.cuisine, recipe.time].filter(Boolean).join(' · ');
 
   return (
-    <Pressable onPress={onPress} style={({ pressed }) => pressed && styles.pressed}>
+    <Link href={{ pathname: '/recipe/[id]', params: { id: recipe.id } }} asChild>
+      <Pressable style={({ pressed }) => pressed && styles.pressed}>
       <ThemedView type="backgroundElement" style={styles.card}>
         <ThemedText>{recipe.title}</ThemedText>
         {subtitle ? (
@@ -35,7 +36,8 @@ export function RecipeCard({ recipe, onPress }: RecipeCardProps) {
           )}
         </View>
       </ThemedView>
-    </Pressable>
+      </Pressable>
+    </Link>
   );
 }
 
