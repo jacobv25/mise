@@ -1,0 +1,48 @@
+[
+  {
+    "title": "Phase 1 · The sour lane",
+    "items": [
+      {
+        "name": "Blanco tequila, 100% agave",
+        "detail": "~$25–35 — must say \"100% agave\" on the label",
+        "optional": false
+      },
+      {
+        "name": "Orange liqueur",
+        "detail": "Cointreau ~$35, or Luxardo Triplum ~$25",
+        "optional": false
+      },
+      {
+        "name": "Soda water",
+        "detail": "also unlocks zero-proof practice rounds and ranch water",
+        "optional": false
+      },
+      {
+        "name": "white rum",
+        "detail": "~$18 → daiquiris, the purest balance-practice drink there is",
+        "optional": true
+      }
+    ],
+    "note": "One spirit + one liqueur unlocks the entire margarita/daiquiri family. ~$70–90 total."
+  },
+  {
+    "title": "Tools",
+    "items": [
+      {
+        "name": "Jigger",
+        "detail": "with ¼ / ½ / ¾ / 1 / 1½ / 2 oz markings — the measuring cups of the bar",
+        "optional": false
+      },
+      {
+        "name": "Cobbler shaker",
+        "detail": "3-piece, built-in strainer — the beginner-friendly one",
+        "optional": false
+      },
+      {
+        "name": "Big-cube ice tray",
+        "detail": "2\" cubes — slower melt, better drinks",
+        "optional": false
+      }
+    ]
+  }
+]

@@ -42,9 +42,10 @@ example
 /ios
 /android
 
-# app data — real export from ~/cooking; commit only recipes.sample.json
+# app data — real exports from ~/cooking; commit only the *.sample.json files
 assets/data/recipes.json
 assets/data/pantry.json
+assets/data/bar.json
 
 # session-local files — agent coordination + sensitive guard vocabulary
 HANDOFF.md

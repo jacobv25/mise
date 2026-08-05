@@ -88,7 +88,7 @@ function ensureSection(sections: PantrySection[], title: string): PantrySection 
 }
 
 /** Indented continuations fold into the line above (same rule as recipes). */
-function joinWrappedLines(lines: string[]): string[] {
+export function joinWrappedLines(lines: string[]): string[] {
   const out: string[] = [];
   for (const line of lines) {
     if (!line.trim()) continue;
