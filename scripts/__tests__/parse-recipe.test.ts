@@ -176,6 +176,68 @@ describe('parseRecipe — bowl-less to-try recipe', () => {
   });
 });
 
+/** Shaped like the real bar-track files: tin/ice "bowls", zero heat tokens. */
+const COCKTAIL_RECIPE = `# The Test Sour 🍸
+
+- **Cuisine:** Cocktail — the classic sour template
+- **Time:** ~8 min active (+ glass chill)   **Serves:** 1
+
+## Nutrition (per serving — required)
+- **Sodium:** ~5 mg (no rim; ~100 mg with the half rim)   **Protein:** 0 g   **Calories:** ~205
+- _Alcohol:_ guardrail prose that must never be exported.
+
+## Mise en place — the bar station
+**Tools & station:** jigger (¼-oz marks) · Boston shaker (both tins) · Hawthorne strainer
+
+- **Bowl ① — The tin, liquids only (→ built in the small tin at step 1, cheapest
+  first):** ¼ oz simple syrup, cold · ¾ oz fresh lime juice · 2 oz blanco tequila
+- **Bowl ② — Shaking ice (→ large tin at step 2):** ice to fill the large tin ⅔ full
+- **Glass station (→ prepped at step 1, poured at step 3):** rocks glass → freezer ≥10 min ·
+  garnish — 1 thin lime wheel
+
+## Steps
+1. **Build the liquids in the small tin, cheapest first:** jigger at eye level.
+2. **SHAKE — hard, 12 seconds on a phone timer.** A piston, not a rock.
+3. **Plate.** Strain over fresh ice, wheel on the clean side of the rim.
+
+## Plating target
+![Plating target](test-sour-plating-target.jpg)
+`;
+
+describe('parseRecipe — cocktail spec from the bar track', () => {
+  const { recipe, warnings } = parseRecipe(COCKTAIL_RECIPE, {
+    id: 'test-sour',
+    status: 'cocktail',
+  });
+
+  test('status passes through and the station parses like a kitchen mise', () => {
+    expect(recipe.status).toBe('cocktail');
+    expect(recipe.tools).toHaveLength(3);
+    expect(recipe.bowls.map((b) => b.name)).toEqual(['The tin, liquids only', 'Shaking ice']);
+    expect(recipe.bowls.map((b) => b.targetStep)).toEqual([1, 2]);
+    expect(recipe.stationExtras.map((e) => e.label)).toEqual(['Glass station']);
+    expect(recipe.stationExtras[0].arrowText).toBe('prepped at step 1, poured at step 3');
+  });
+
+  test('no burner anywhere: every step has null heat (SHAKE is not a token)', () => {
+    expect(recipe.steps).toHaveLength(3);
+    expect(recipe.steps.every((s) => s.heat === null)).toBe(true);
+  });
+
+  test('nutrition parses; alcohol guardrail and plating image stay out of the export', () => {
+    expect(recipe.sodiumMg).toBe(5);
+    expect(recipe.proteinG).toBe(0);
+    expect(recipe.calories).toBe(205);
+    const json = JSON.stringify(recipe);
+    expect(json).not.toContain('guardrail prose');
+    expect(json).not.toContain('plating-target.jpg');
+  });
+
+  test('parses clean with no warnings', () => {
+    expect(warnings).toEqual([]);
+  });
+});
+
 describe('parseRecipe — contract violations surface as warnings', () => {
   test('bowl arrow pointing at a nonexistent step warns', () => {
     const md = `# Broken

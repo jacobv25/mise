@@ -8,7 +8,8 @@
  * is its TypeScript mirror.
  */
 
-export type RecipeStatus = 'made' | 'to-try';
+/** Which `~/cooking/recipes/` directory the file came from ('cocktail' ← `cocktails/`). */
+export type RecipeStatus = 'made' | 'to-try' | 'cocktail';
 
 /** Fixed heat vocabulary from the template, e.g. "MEDIUM-HIGH", "OVEN 425°F", "no heat". */
 export type HeatLevel = string;

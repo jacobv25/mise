@@ -41,16 +41,24 @@ const FORBIDDEN_MARKERS: string[] = [
     : []),
 ];
 
+const STATUS_DIRS: Record<RecipeStatus, string> = {
+  made: 'made',
+  'to-try': 'to-try',
+  cocktail: 'cocktails',
+};
+
 function readDir(status: RecipeStatus): { recipes: Recipe[]; warnings: string[] } {
-  const dir = path.join(COOKING_DIR, 'recipes', status === 'made' ? 'made' : 'to-try');
+  const dir = path.join(COOKING_DIR, 'recipes', STATUS_DIRS[status]);
   const recipes: Recipe[] = [];
   const warnings: string[] = [];
-  // Skip non-.md files — stray .html exports live alongside the recipes.
+  // Skip non-.md files — stray .html exports and plating jpgs live alongside the recipes.
   for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.md')).sort()) {
     const markdown = fs.readFileSync(path.join(dir, file), 'utf8');
     const result = parseRecipe(markdown, { id: file.replace(/\.md$/, ''), status });
-    if (status === 'made' && result.recipe.bowls.length === 0) {
-      warnings.push(`${result.recipe.id}: made recipe has no mise bowls`);
+    // Made dishes and cocktail specs are station-first; only to-try queue
+    // entries may fall back to a flat ingredient list.
+    if (status !== 'to-try' && result.recipe.bowls.length === 0) {
+      warnings.push(`${result.recipe.id}: ${status} recipe has no mise bowls`);
     }
     recipes.push(result.recipe);
     warnings.push(...result.warnings);
@@ -60,8 +68,9 @@ function readDir(status: RecipeStatus): { recipes: Recipe[]; warnings: string[] 
 
 const made = readDir('made');
 const toTry = readDir('to-try');
-const recipes = [...made.recipes, ...toTry.recipes];
-const warnings = [...made.warnings, ...toTry.warnings];
+const cocktails = readDir('cocktail');
+const recipes = [...made.recipes, ...toTry.recipes, ...cocktails.recipes];
+const warnings = [...made.warnings, ...toTry.warnings, ...cocktails.warnings];
 
 const pantry = parsePantry(fs.readFileSync(path.join(COOKING_DIR, 'pantry.md'), 'utf8'));
 const bar = parseBar(fs.readFileSync(path.join(COOKING_DIR, 'bar.md'), 'utf8'));
@@ -93,7 +102,8 @@ const bowlCount = recipes.reduce((n, r) => n + r.bowls.length, 0);
 const pantryCount = pantry.reduce((n, s) => n + s.items.length, 0);
 const barCount = bar.reduce((n, s) => n + s.items.length, 0);
 console.log(
-  `Exported ${made.recipes.length} made + ${toTry.recipes.length} to-try recipes ` +
+  `Exported ${made.recipes.length} made + ${toTry.recipes.length} to-try + ` +
+    `${cocktails.recipes.length} cocktail recipes ` +
     `(${bowlCount} bowls) → ${path.relative(process.cwd(), OUT_FILE)}\n` +
     `Exported ${pantry.length} pantry sections (${pantryCount} items) → ` +
     path.relative(process.cwd(), PANTRY_OUT_FILE) +

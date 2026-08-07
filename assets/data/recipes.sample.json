@@ -325,5 +325,133 @@
         "heat": null
       }
     ]
+  },
+  {
+    "id": "margarita",
+    "title": "The Margarita — Precision Spec 🍸",
+    "status": "cocktail",
+    "cuisine": "Cocktail — the classic sour template",
+    "time": "~8 min active (+ syrup made ahead, + ≥10 min glass chill)",
+    "serves": "1",
+    "source": "[Cointreau — the original Margarita](https://www.cointreau.com/us/en/cocktails/margarita), tuned to the modern 2:¾:¾:¼ balanced spec",
+    "sodiumMg": 5,
+    "proteinG": 0,
+    "calories": 205,
+    "tools": [
+      "jigger (¼-oz marks)",
+      "Boston shaker (both tins)",
+      "Hawthorne strainer",
+      "citrus squeezer or fork",
+      "paring knife + board",
+      "small plate (for salt, if rimming)",
+      "phone timer",
+      "garbage bowl (lime husks)",
+      "damp towel under the board",
+      "hand towel",
+      "landing plate for wet tools"
+    ],
+    "bowls": [
+      {
+        "index": 1,
+        "name": "The tin, liquids only — NO ice yet",
+        "arrowText": "→ built in the small tin at step 3, cheapest first",
+        "targetStep": 3,
+        "items": [
+          "¼ oz (7.5 ml) simple syrup, cold",
+          "¾ oz (22 ml) fresh lime juice — squeezed 1–4 h ahead if you can (detail #1)",
+          "¾ oz (22 ml) Cointreau",
+          "2 oz (60 ml) blanco tequila"
+        ]
+      },
+      {
+        "index": 2,
+        "name": "Shaking ice",
+        "arrowText": "→ large tin at step 5, only after the straw-taste",
+        "targetStep": 5,
+        "items": [
+          "ice to fill the large tin ⅔ full — 5–6 standard cubes or 2 big cubes",
+          "waits in the freezer until the moment of the shake, never sitting out melting"
+        ]
+      }
+    ],
+    "stationExtras": [
+      {
+        "label": "Glass station",
+        "arrowText": "prepped at step 1, poured at step 7",
+        "items": [
+          "rocks glass → freezer ≥10 min",
+          "fresh serving ice for the pour, biggest cubes you have — separate from the shaking ice",
+          "optional half-rim — 1 tsp coarse/kosher salt on the small plate + a spare lime wedge",
+          "garnish — 1 thin lime wheel, cut during step 1's dead minutes"
+        ]
+      },
+      {
+        "label": "Made ahead — simple syrup",
+        "arrowText": null,
+        "items": [
+          "100 g sugar + 100 g water in the small pan over low heat",
+          "stir just until fully clear (~3 min), never boil — boiling evaporates water and silently changes the 1-to-1 ratio",
+          "cool completely, jar, fridge ~2–3 weeks",
+          "yield ~150 ml ≈ 20 margaritas' worth"
+        ]
+      }
+    ],
+    "ingredients": [],
+    "steps": [
+      {
+        "number": 1,
+        "text": "**Chill the glass (freezer, ≥10 min).** ⏱ *Dead minutes — use them:* roll limes hard under your palm (bursts juice vesicles, +20% yield), halve, squeeze ~1–1½ limes, pick out seeds. Cut one thin center wheel for garnish. Ideally this happened 1–4 h ago.",
+        "leadIn": "Chill the glass (freezer, ≥10 min).",
+        "heat": null
+      },
+      {
+        "number": 2,
+        "text": "**(If rimming) Salt the HALF rim now, on the empty cold glass.** Wedge-wipe the *outside* of half the rim, roll that edge through the salt plate. Outside only — salt inside the rim falls in and you can't undo it. Return glass to freezer.",
+        "leadIn": "(If rimming) Salt the HALF rim now, on the empty cold glass.",
+        "heat": null
+      },
+      {
+        "number": 3,
+        "text": "**Build the liquids in the small tin, cheapest first:** syrup ¼ oz → lime ¾ oz → Cointreau ¾ oz → tequila 2 oz. (Cheap-first habit: a mis-measure gets dumped before the expensive pour.) Read the jigger at eye level; a ¼-oz miss is a different drink.",
+        "leadIn": "Build the liquids in the small tin, cheapest first:",
+        "heat": null
+      },
+      {
+        "number": 4,
+        "text": "**Straw-taste the raw build.** Dip a straw, finger over the top, taste. It should read too strong and too intense — the shake's job is to fix exactly that. This is calibration: remember this taste to compare post-shake.",
+        "leadIn": "Straw-taste the raw build.",
+        "heat": null
+      },
+      {
+        "number": 5,
+        "text": "**Ice the large tin ⅔ full, seal the tins at a slight angle, burp-tap to lock.** Small tin on top. Grip both ends.",
+        "leadIn": "Ice the large tin ⅔ full, seal the tins at a slight angle, burp-tap to lock.",
+        "heat": null
+      },
+      {
+        "number": 6,
+        "text": "**SHAKE — hard, 12 seconds on a phone timer.** Not a rock, a piston: the ice should slam both ends of the tin. By ~12 s the drink hits thermal equilibrium (–5 to –8 °C, ~25% dilution) and more shaking changes almost nothing — vigor matters, duration past 12–15 s doesn't. The big tin will frost and hurt to hold. That's done.",
+        "leadIn": "SHAKE — hard, 12 seconds on a phone timer.",
+        "heat": null
+      },
+      {
+        "number": 7,
+        "text": "**Crack the seal (heel of hand where the tins meet), Hawthorne-strain into the chilled glass over FRESH ice.** Never the shaking ice — it's spent, cracked, and fast-melting; it would blow past the 25% dilution target in minutes.",
+        "leadIn": "Crack the seal (heel of hand where the tins meet), Hawthorne-strain into the chilled glass over FRESH ice.",
+        "heat": null
+      },
+      {
+        "number": 8,
+        "text": "**Balance check (the skill rep):** straw-taste what's left in the tin. Too tart → next time +¼ oz syrup. Too sweet → +¼ oz lime. Flabby/watery → shake was too long or ice sat out. Log the verdict.",
+        "leadIn": "Balance check (the skill rep):",
+        "heat": null
+      },
+      {
+        "number": 9,
+        "text": "**Plate.** Rocks glass on a coaster, salt-rim (if used) facing away from you so you choose salt sip-by-sip. Lime wheel perched on the clean side of the rim. Wipe any drips off the glass wall. **Tall glass of water alongside — always.** Sip at the 0-minute and 10-minute mark and notice the drink change as the big cubes slowly open it up.",
+        "leadIn": "Plate.",
+        "heat": null
+      }
+    ]
   }
 ]

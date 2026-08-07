@@ -27,10 +27,10 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
         <View style={styles.badgeRow}>
           <NutritionBadge value={recipe.sodiumMg} unit=" mg" label="sodium" />
           <NutritionBadge value={recipe.proteinG} unit=" g" label="protein" />
-          {recipe.status === 'to-try' && (
-            <ThemedView type="backgroundSelected" style={styles.toTryChip}>
+          {recipe.status !== 'made' && (
+            <ThemedView type="backgroundSelected" style={styles.statusChip}>
               <ThemedText type="small" themeColor="textSecondary">
-                to try
+                {recipe.status === 'to-try' ? 'to try' : 'cocktail'}
               </ThemedText>
             </ThemedView>
           )}
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: Spacing.two,
   },
-  toTryChip: {
+  statusChip: {
     paddingVertical: Spacing.half,
     paddingHorizontal: Spacing.two,
     borderRadius: Spacing.two,
