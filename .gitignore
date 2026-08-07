@@ -46,6 +46,7 @@ example
 assets/data/recipes.json
 assets/data/pantry.json
 assets/data/bar.json
+assets/data/shopping.json
 
 # session-local files — agent coordination + sensitive guard vocabulary
 HANDOFF.md

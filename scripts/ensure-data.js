@@ -10,7 +10,7 @@ const path = require('path');
 
 const dataDir = path.join(__dirname, '..', 'assets', 'data');
 
-for (const name of ['recipes', 'pantry', 'bar']) {
+for (const name of ['recipes', 'pantry', 'bar', 'shopping']) {
   const real = path.join(dataDir, `${name}.json`);
   const sample = path.join(dataDir, `${name}.sample.json`);
   if (!fs.existsSync(real)) {

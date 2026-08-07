@@ -1,0 +1,71 @@
+[
+  {
+    "title": "Kitchen run",
+    "items": [
+      {
+        "name": "Half-sheet pan",
+        "detail": "correction 8/2: the 7/21 \"bought\" note was wrong — never owned; glass baking dish covering roasting meanwhile",
+        "optional": false
+      },
+      {
+        "name": "Eggs, 1 dozen",
+        "detail": "6 went into the 8/5 egg salad — carton likely empty; the fry rep on the skills tracker is waiting on these too",
+        "optional": false
+      },
+      {
+        "name": "Corn tortillas, lowest-sodium brand",
+        "detail": "still out — banked taco lane waiting",
+        "optional": false
+      },
+      {
+        "name": "Canned tuna, no-salt-added",
+        "detail": "×3–4 still out",
+        "optional": false
+      },
+      {
+        "name": "Garlic powder + onion powder",
+        "detail": "still out — jarred chopped garlic covering meanwhile",
+        "optional": false
+      },
+      {
+        "name": "Ground cumin",
+        "detail": "running low 8/6 — the workhorse of the no-salt taco blend, don't run dry",
+        "optional": false
+      },
+      {
+        "name": "Black peppercorns",
+        "detail": "running low 8/6",
+        "optional": false
+      },
+      {
+        "name": "Granulated sugar",
+        "detail": "added 8/5 — bar simple syrup is homemade; also on `bar.md` list",
+        "optional": false
+      },
+      {
+        "name": "More limes + lemons",
+        "detail": "added 8/5 — several on hand, but the bar's fresh-citrus rule + kitchen use will burn through them; keep the bowl full",
+        "optional": false
+      },
+      {
+        "name": "All-purpose flour, small bag",
+        "detail": "not in the current inventory, and the queued creamy-steak-pasta roux needs 2 tbsp verify the shelf first; any small bag lasts ages",
+        "optional": false
+      },
+      {
+        "name": "Caraway seeds",
+        "optional": true
+      },
+      {
+        "name": "8\" nonstick egg pan",
+        "detail": "~$15 — makes fried-egg/scramble reps easy mode",
+        "optional": true
+      },
+      {
+        "name": "Meal-prep containers",
+        "detail": "only a couple Tupperware on hand vs. the Sunday batch habit",
+        "optional": true
+      }
+    ]
+  }
+]

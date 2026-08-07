@@ -18,12 +18,14 @@ import type { Recipe, RecipeStatus } from '../src/types/recipe';
 import { parseBar } from './parse-bar';
 import { parsePantry } from './parse-pantry';
 import { parseRecipe } from './parse-recipe';
+import { parseShopping } from './parse-shopping';
 
 const COOKING_DIR = process.env.COOKING_DIR ?? path.join(os.homedir(), 'cooking');
 const DATA_DIR = path.resolve(__dirname, '..', 'assets', 'data');
 const OUT_FILE = path.join(DATA_DIR, 'recipes.json');
 const PANTRY_OUT_FILE = path.join(DATA_DIR, 'pantry.json');
 const BAR_OUT_FILE = path.join(DATA_DIR, 'bar.json');
+const SHOPPING_OUT_FILE = path.join(DATA_DIR, 'shopping.json');
 
 // Belt-and-suspenders on top of the parsers' allowlist extraction: phrases
 // that only occur in the workspace's private sections must never reach the
@@ -72,15 +74,22 @@ const cocktails = readDir('cocktail');
 const recipes = [...made.recipes, ...toTry.recipes, ...cocktails.recipes];
 const warnings = [...made.warnings, ...toTry.warnings, ...cocktails.warnings];
 
-const pantry = parsePantry(fs.readFileSync(path.join(COOKING_DIR, 'pantry.md'), 'utf8'));
+const pantryMd = fs.readFileSync(path.join(COOKING_DIR, 'pantry.md'), 'utf8');
+const pantry = parsePantry(pantryMd);
+const shopping = parseShopping(pantryMd);
 const bar = parseBar(fs.readFileSync(path.join(COOKING_DIR, 'bar.md'), 'utf8'));
 
 const json = JSON.stringify(recipes, null, 2) + '\n';
 const pantryJson = JSON.stringify(pantry, null, 2) + '\n';
 const barJson = JSON.stringify(bar, null, 2) + '\n';
+const shoppingJson = JSON.stringify(shopping, null, 2) + '\n';
 
 const leaked = FORBIDDEN_MARKERS.filter(
-  (marker) => json.includes(marker) || pantryJson.includes(marker) || barJson.includes(marker),
+  (marker) =>
+    json.includes(marker) ||
+    pantryJson.includes(marker) ||
+    barJson.includes(marker) ||
+    shoppingJson.includes(marker),
 );
 if (leaked.length > 0) {
   console.error(`PRIVACY GUARD: export contains forbidden content: ${leaked.join(', ')}`);
@@ -97,10 +106,12 @@ fs.mkdirSync(DATA_DIR, { recursive: true });
 fs.writeFileSync(OUT_FILE, json);
 fs.writeFileSync(PANTRY_OUT_FILE, pantryJson);
 fs.writeFileSync(BAR_OUT_FILE, barJson);
+fs.writeFileSync(SHOPPING_OUT_FILE, shoppingJson);
 
 const bowlCount = recipes.reduce((n, r) => n + r.bowls.length, 0);
 const pantryCount = pantry.reduce((n, s) => n + s.items.length, 0);
 const barCount = bar.reduce((n, s) => n + s.items.length, 0);
+const shoppingCount = shopping.reduce((n, s) => n + s.items.length, 0);
 console.log(
   `Exported ${made.recipes.length} made + ${toTry.recipes.length} to-try + ` +
     `${cocktails.recipes.length} cocktail recipes ` +
@@ -108,5 +119,7 @@ console.log(
     `Exported ${pantry.length} pantry sections (${pantryCount} items) → ` +
     path.relative(process.cwd(), PANTRY_OUT_FILE) +
     `\nExported ${bar.length} bar sections (${barCount} items) → ` +
-    path.relative(process.cwd(), BAR_OUT_FILE),
+    path.relative(process.cwd(), BAR_OUT_FILE) +
+    `\nExported ${shoppingCount} shopping items → ` +
+    path.relative(process.cwd(), SHOPPING_OUT_FILE),
 );
