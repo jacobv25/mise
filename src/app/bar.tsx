@@ -1,7 +1,7 @@
 import { SectionList, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { BarRow } from '@/components/bar-row';
+import { ChecklistRow } from '@/components/checklist-row';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
@@ -28,7 +28,7 @@ export default function BarScreen() {
           keyExtractor={(item) => item.name}
           renderItem={({ item, section }) => {
             const key = `${section.title}:${item.name}`;
-            return <BarRow item={item} checked={checked.has(key)} onToggle={() => toggle(key)} />;
+            return <ChecklistRow item={item} checked={checked.has(key)} onToggle={() => toggle(key)} />;
           }}
           renderSectionHeader={({ section }) => (
             <ThemedView style={styles.sectionHeader}>

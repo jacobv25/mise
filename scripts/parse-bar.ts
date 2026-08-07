@@ -15,10 +15,10 @@
  *  - the first non-list line under a heading becomes the section `note`.
  */
 
-import type { BarItem, BarSection } from '../src/types/bar';
+import type { ChecklistItem, ChecklistSection } from '../src/types/checklist';
 import { joinWrappedLines } from './parse-pantry';
 
-export type { BarItem, BarSection } from '../src/types/bar';
+export type { ChecklistItem, ChecklistSection } from '../src/types/checklist';
 
 /** Section headings we export, in display order, with app-facing titles. */
 const SECTIONS: { re: RegExp; title: string }[] = [
@@ -27,10 +27,10 @@ const SECTIONS: { re: RegExp; title: string }[] = [
   { re: /^tools/i, title: 'Tools' },
 ];
 
-export function parseBar(markdown: string): BarSection[] {
+export function parseBar(markdown: string): ChecklistSection[] {
   const source = markdown.replace(/<!--[\s\S]*?-->/g, '');
-  const sections: BarSection[] = [];
-  let current: BarSection | null = null;
+  const sections: ChecklistSection[] = [];
+  let current: ChecklistSection | null = null;
 
   for (const line of joinWrappedLines(source.split('\n'))) {
     const heading = line.match(/^##\s+(.+)$/);
@@ -57,14 +57,17 @@ export function parseBar(markdown: string): BarSection[] {
       const optional = !box && /^optional\b/i.test(part);
       if (!box && !optional) continue; // "Already owned…" prose lines
       if (box && box[1].toLowerCase() === 'x') continue; // bought → inventory
-      current.items.push(parseItem(box ? box[2] : part.replace(/^optional[^:]*:\s*/i, ''), optional));
+      current.items.push(
+        parseChecklistItem(box ? box[2] : part.replace(/^optional[^:]*:\s*/i, ''), optional),
+      );
     }
   }
 
   return sections.filter((s) => s.items.length > 0);
 }
 
-function parseItem(text: string, optional: boolean): BarItem {
+/** Shared line parser — the pantry's running shopping list uses the same item grammar. */
+export function parseChecklistItem(text: string, optional: boolean): ChecklistItem {
   const bold = text.match(/^\*\*(.+?)\*\*\s*(.*)$/);
   let name: string;
   let rest: string;

@@ -3,16 +3,16 @@ import { Pressable, StyleSheet, View } from 'react-native';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Spacing } from '@/constants/theme';
-import type { BarItem } from '@/types/bar';
+import type { ChecklistItem } from '@/types/checklist';
 
-export type BarRowProps = {
-  item: BarItem;
+export type ChecklistRowProps = {
+  item: ChecklistItem;
   checked: boolean;
   onToggle: () => void;
 };
 
 /** One checkable shopping line: ○/✓, name + optional chip, price/brand detail below. */
-export function BarRow({ item, checked, onToggle }: BarRowProps) {
+export function ChecklistRow({ item, checked, onToggle }: ChecklistRowProps) {
   return (
     <Pressable
       onPress={onToggle}
