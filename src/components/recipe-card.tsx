@@ -27,10 +27,10 @@ export function RecipeCard({ recipe }: RecipeCardProps) {
         <View style={styles.badgeRow}>
           <NutritionBadge value={recipe.sodiumMg} unit=" mg" label="sodium" />
           <NutritionBadge value={recipe.proteinG} unit=" g" label="protein" />
-          {recipe.status !== 'made' && (
+          {recipe.status === 'to-try' && (
             <ThemedView type="backgroundSelected" style={styles.statusChip}>
               <ThemedText type="small" themeColor="textSecondary">
-                {recipe.status === 'to-try' ? 'to try' : 'cocktail'}
+                to try
               </ThemedText>
             </ThemedView>
           )}
