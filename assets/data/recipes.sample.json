@@ -453,5 +453,86 @@
         "heat": null
       }
     ]
+  },
+  {
+    "id": "cherry-lime-rickey",
+    "title": "The Cherry-Lime Rickey — Zero-Proof Precision Spec 🍸",
+    "status": "mocktail",
+    "cuisine": "Zero-proof — soda-fountain classic, rickey family",
+    "time": "~3 min active (+ glass & bottles fridge-cold ahead)",
+    "serves": "1",
+    "source": "classic soda-fountain lime rickey (lime + soda, tart-forward), cherry soda as the metered sweet element",
+    "sodiumMg": 15,
+    "proteinG": 0,
+    "calories": 45,
+    "tools": [
+      "jigger (¼-oz marks)",
+      "citrus squeezer or fork",
+      "paring knife + board",
+      "long bar spoon",
+      "garbage bowl (lime husks)",
+      "hand towel"
+    ],
+    "bowls": [
+      {
+        "index": 1,
+        "name": "Serving ice",
+        "arrowText": "→ into the collins glass at step 1, before anything else",
+        "targetStep": 1,
+        "items": [
+          "ice to fill the glass to the rim — the biggest cubes you have",
+          "waits in the freezer until the moment of the pour, never sitting out melting"
+        ]
+      },
+      {
+        "index": 2,
+        "name": "The pour, liquids only",
+        "arrowText": "→ built straight in the glass at step 2, lime first",
+        "targetStep": 2,
+        "items": [
+          "½ oz (15 ml) fresh lime juice — one lime, rolled hard before squeezing",
+          "3 oz (90 ml) black cherry soda, fridge-cold",
+          "3 oz (90 ml) plain soda water, fridge-cold"
+        ]
+      }
+    ],
+    "stationExtras": [
+      {
+        "label": "Glass station",
+        "arrowText": "prepped at step 1, garnished at step 4",
+        "items": [
+          "collins or highball glass → freezer ≥10 min",
+          "garnish — 1 lime wheel, cut while the glass chills",
+          "1 cocktail cherry, dropped so it sinks"
+        ]
+      }
+    ],
+    "ingredients": [],
+    "steps": [
+      {
+        "number": 1,
+        "text": "**Pull the cold glass and fill it with ice to the rim.** A half-filled glass melts twice as fast — the ice is insulation, not decoration. Cut the lime wheel now, in the dead seconds.",
+        "leadIn": "Pull the cold glass and fill it with ice to the rim.",
+        "heat": null
+      },
+      {
+        "number": 2,
+        "text": "**Build in the glass, lime first:** ½ oz lime → 3 oz cherry soda → 3 oz soda water. Lime first means you can straw-taste and correct before the bubbles are in. Pour the sodas down the bar spoon to keep the carbonation.",
+        "leadIn": "Build in the glass, lime first:",
+        "heat": null
+      },
+      {
+        "number": 3,
+        "text": "**One gentle stir — bottom to top, once.** Carbonation is an ingredient; every extra stir spends some. If it reads sweet-first, add another ¼ oz lime — a rickey is tart-forward or it is just soda.",
+        "leadIn": "One gentle stir — bottom to top, once.",
+        "heat": null
+      },
+      {
+        "number": 4,
+        "text": "**Plate.** Lime wheel on the rim, cherry dropped to the bottom. Wipe the glass wall, coaster underneath. Sip it while it is loud — a rickey is at its best in the first five minutes.",
+        "leadIn": "Plate.",
+        "heat": null
+      }
+    ]
   }
 ]

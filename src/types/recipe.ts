@@ -8,8 +8,13 @@
  * is its TypeScript mirror.
  */
 
-/** Which `~/cooking/recipes/` directory the file came from ('cocktail' ← `cocktails/`). */
-export type RecipeStatus = 'made' | 'to-try' | 'cocktail';
+/**
+ * Which `~/cooking/recipes/` directory the file came from ('cocktail' ← `cocktails/`).
+ * 'mocktail' is the one exception to the directory rule: zero-proof specs are
+ * filed in `cocktails/` too, and the exporter splits them off by their
+ * "**Cuisine:** Zero-proof …" line (see `isZeroProof` in parse-recipe.ts).
+ */
+export type RecipeStatus = 'made' | 'to-try' | 'cocktail' | 'mocktail';
 
 /** Fixed heat vocabulary from the template, e.g. "MEDIUM-HIGH", "OVEN 425°F", "no heat". */
 export type HeatLevel = string;

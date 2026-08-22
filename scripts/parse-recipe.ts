@@ -107,6 +107,17 @@ export function parseRecipe(
   };
 }
 
+/**
+ * Zero-proof drinks live in `recipes/cocktails/` next to the alcoholic specs —
+ * the drink is the same build, the reps count the same, only the base spirit is
+ * missing. The one machine-readable marker is the template's "**Cuisine:**"
+ * line opening with "Zero-proof"; `export-data.ts` uses this to file them under
+ * the 'mocktail' status instead of 'cocktail'.
+ */
+export function isZeroProof(cuisine: string | null): boolean {
+  return /^zero[-\s]?proof\b/i.test(cuisine?.trim() ?? '');
+}
+
 function matchMetaBullet(source: string, label: string): string | null {
   return source.match(new RegExp(`^-\\s*\\*\\*${label}:\\*\\*\\s*(.+)$`, 'm'))?.[1].trim() ?? null;
 }

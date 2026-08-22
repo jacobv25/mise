@@ -17,7 +17,7 @@ import * as path from 'node:path';
 import type { Recipe, RecipeStatus } from '../src/types/recipe';
 import { parseBar } from './parse-bar';
 import { parsePantry } from './parse-pantry';
-import { parseRecipe } from './parse-recipe';
+import { isZeroProof, parseRecipe } from './parse-recipe';
 import { parseShopping } from './parse-shopping';
 
 const COOKING_DIR = process.env.COOKING_DIR ?? path.join(os.homedir(), 'cooking');
@@ -43,13 +43,15 @@ const FORBIDDEN_MARKERS: string[] = [
     : []),
 ];
 
-const STATUS_DIRS: Record<RecipeStatus, string> = {
+// One directory per status, except `cocktails/` — it holds the zero-proof specs
+// too, and they get split out to 'mocktail' after parsing (see isZeroProof).
+const STATUS_DIRS = {
   made: 'made',
   'to-try': 'to-try',
   cocktail: 'cocktails',
-};
+} as const satisfies Partial<Record<RecipeStatus, string>>;
 
-function readDir(status: RecipeStatus): { recipes: Recipe[]; warnings: string[] } {
+function readDir(status: keyof typeof STATUS_DIRS): { recipes: Recipe[]; warnings: string[] } {
   const dir = path.join(COOKING_DIR, 'recipes', STATUS_DIRS[status]);
   const recipes: Recipe[] = [];
   const warnings: string[] = [];
@@ -70,9 +72,16 @@ function readDir(status: RecipeStatus): { recipes: Recipe[]; warnings: string[] 
 
 const made = readDir('made');
 const toTry = readDir('to-try');
-const cocktails = readDir('cocktail');
-const recipes = [...made.recipes, ...toTry.recipes, ...cocktails.recipes];
-const warnings = [...made.warnings, ...toTry.warnings, ...cocktails.warnings];
+const drinks = readDir('cocktail');
+// Same directory, same station contract — only the "Cuisine: Zero-proof" line
+// tells them apart, and the list screen gives each its own section.
+const cocktails = drinks.recipes.filter((r) => !isZeroProof(r.cuisine));
+const mocktails: Recipe[] = drinks.recipes
+  .filter((r) => isZeroProof(r.cuisine))
+  .map((r) => ({ ...r, status: 'mocktail' }));
+
+const recipes = [...made.recipes, ...toTry.recipes, ...cocktails, ...mocktails];
+const warnings = [...made.warnings, ...toTry.warnings, ...drinks.warnings];
 
 const pantryMd = fs.readFileSync(path.join(COOKING_DIR, 'pantry.md'), 'utf8');
 const pantry = parsePantry(pantryMd);
@@ -114,7 +123,7 @@ const barCount = bar.reduce((n, s) => n + s.items.length, 0);
 const shoppingCount = shopping.reduce((n, s) => n + s.items.length, 0);
 console.log(
   `Exported ${made.recipes.length} made + ${toTry.recipes.length} to-try + ` +
-    `${cocktails.recipes.length} cocktail recipes ` +
+    `${cocktails.length} cocktail + ${mocktails.length} mocktail recipes ` +
     `(${bowlCount} bowls) → ${path.relative(process.cwd(), OUT_FILE)}\n` +
     `Exported ${pantry.length} pantry sections (${pantryCount} items) → ` +
     path.relative(process.cwd(), PANTRY_OUT_FILE) +

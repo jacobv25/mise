@@ -7,10 +7,15 @@ import { ThemedView } from '@/components/themed-view';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { recipes } from '@/data/recipes';
 
-/** Kitchen recipes (made + to-try, exporter order) and cocktails as their own section. */
+/**
+ * Kitchen recipes (made + to-try, exporter order), then the two drink tracks.
+ * Mocktails get their own section rather than a chip: reaching for a drink you
+ * can actually have is a different decision from browsing the bar.
+ */
 const sections = [
-  { title: 'Kitchen', data: recipes.filter((r) => r.status !== 'cocktail') },
+  { title: 'Kitchen', data: recipes.filter((r) => r.status === 'made' || r.status === 'to-try') },
   { title: 'Cocktails', data: recipes.filter((r) => r.status === 'cocktail') },
+  { title: 'Mocktails', data: recipes.filter((r) => r.status === 'mocktail') },
 ].filter((section) => section.data.length > 0);
 
 export default function RecipesScreen() {

@@ -1,4 +1,4 @@
-import { parseRecipe } from '../parse-recipe';
+import { isZeroProof, parseRecipe } from '../parse-recipe';
 
 /**
  * Fixtures are synthetic but shaped exactly like the real `~/cooking` files —
@@ -286,5 +286,69 @@ describe('parseRecipe — contract violations surface as warnings', () => {
 `;
     const { recipe } = parseRecipe(md, { id: 'oven', status: 'made' });
     expect(recipe.steps[0].heat).toBe('OVEN 425°F');
+  });
+});
+
+/**
+ * Zero-proof specs share the `cocktails/` directory with the alcoholic ones,
+ * so the exporter can only tell them apart by the Cuisine line. The real
+ * corpus writes it two ways — "Zero-proof — …" and "Zero-proof cooler — …".
+ */
+describe('isZeroProof — the mocktail split inside cocktails/', () => {
+  test('matches the zero-proof cuisine lines, with or without a trailing noun', () => {
+    expect(isZeroProof('Zero-proof — soda-fountain classic, rickey family')).toBe(true);
+    expect(isZeroProof('Zero-proof cooler — the collins family shape, no spirit')).toBe(true);
+    expect(isZeroProof('zero proof — lowercase, spaced')).toBe(true);
+  });
+
+  test('leaves the alcoholic specs alone', () => {
+    expect(isZeroProof('Cocktail — the classic sour template')).toBe(false);
+    expect(isZeroProof('Cocktail — highball / built & topped, tequila lane')).toBe(false);
+    // Only the opening word counts: a cocktail that merely mentions the
+    // zero-proof variant in its cuisine prose is still a cocktail.
+    expect(isZeroProof('Cocktail — spritz family, has a zero-proof sibling')).toBe(false);
+  });
+
+  test('kitchen recipes and missing cuisine lines are never zero-proof', () => {
+    expect(isZeroProof('Italian-American')).toBe(false);
+    expect(isZeroProof(null)).toBe(false);
+  });
+});
+
+const ZERO_PROOF_RECIPE = `# The Test Cooler — Zero-Proof Precision Spec 🍸
+
+- **Cuisine:** Zero-proof cooler — the collins family shape, no spirit
+- **Time:** ~3 min active (+ bottles fridge-cold)   **Serves:** 1
+
+## Nutrition (per serving — required)
+- **Sodium:** ~5 mg   **Protein:** 0 g   **Calories:** ~35
+- _Alcohol:_ **0.0** — guardrail prose that must never be exported.
+
+## Mise en place — the bar station
+**Tools & station:** jigger (¼-oz marks) · long bar spoon
+
+- **Bowl ① — Serving ice (→ into the glass at step 1):** ice to fill the collins glass
+- **Bowl ② — The pour, liquids only (→ built in the glass at step 2, lime first):**
+  ½ oz fresh lime juice · 3 oz rose lemonade · 3 oz soda water
+
+## Steps
+1. **Fill the cold glass with ice.** Biggest cubes you have.
+2. **Build in the glass, lime first.** Down the bar spoon, to keep the bubbles.
+`;
+
+describe('parseRecipe — zero-proof spec parses like its alcoholic sibling', () => {
+  const { recipe, warnings } = parseRecipe(ZERO_PROOF_RECIPE, {
+    id: 'test-cooler',
+    status: 'cocktail',
+  });
+
+  test('parses clean, and the cuisine line flags it for the mocktail split', () => {
+    expect(warnings).toEqual([]);
+    expect(recipe.bowls.map((b) => b.targetStep)).toEqual([1, 2]);
+    expect(isZeroProof(recipe.cuisine)).toBe(true);
+  });
+
+  test('the 0.0 alcohol guardrail stays out of the export like any other', () => {
+    expect(JSON.stringify(recipe)).not.toContain('guardrail prose');
   });
 });
