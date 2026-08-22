@@ -1,5 +1,5 @@
 import { useKeepAwake } from 'expo-keep-awake';
-import { Stack, useLocalSearchParams } from 'expo-router';
+import { Link, Stack, useLocalSearchParams } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { BowlCard } from '@/components/bowl-card';
@@ -10,12 +10,14 @@ import { ThemedView } from '@/components/themed-view';
 import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 import { recipes } from '@/data/recipes';
 import { useCookingSession } from '@/hooks/use-cooking-session';
+import { useTheme } from '@/hooks/use-theme';
 
 export default function RecipeDetailScreen() {
   // The kitchen screen: stay awake while a recipe is open — wet hands
   // shouldn't have to tap the phone to keep it lit.
   useKeepAwake();
 
+  const theme = useTheme();
   const { id } = useLocalSearchParams<{ id: string }>();
   const recipe = recipes.find((r) => r.id === id);
   const { checked, toggle } = useCookingSession(id ?? 'unknown');
@@ -48,6 +50,22 @@ export default function RecipeDetailScreen() {
           <NutritionTile value={recipe.proteinG} unit="g" label="protein" />
           <NutritionTile value={recipe.calories} unit="kcal" label="calories" />
         </View>
+
+        {recipe.steps.length > 0 && (
+          <Link href={{ pathname: '/recipe/[id]/cook', params: { id: recipe.id } }} asChild>
+            <Pressable
+              accessibilityRole="button"
+              style={({ pressed }) => [
+                styles.cookButton,
+                { backgroundColor: theme.text },
+                pressed && styles.pressed,
+              ]}>
+              <ThemedText type="smallBold" style={[styles.cookLabel, { color: theme.background }]}>
+                Start cooking
+              </ThemedText>
+            </Pressable>
+          </Link>
+        )}
 
         {hasMise ? (
           <>
@@ -160,6 +178,17 @@ const styles = StyleSheet.create({
   tileRow: {
     flexDirection: 'row',
     gap: Spacing.two,
+  },
+  cookButton: {
+    minHeight: 56,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: Spacing.three,
+    marginTop: Spacing.two,
+  },
+  cookLabel: {
+    fontSize: 17,
+    lineHeight: 22,
   },
   sectionTitle: {
     fontSize: 24,
