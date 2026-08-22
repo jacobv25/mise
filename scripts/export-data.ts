@@ -55,8 +55,14 @@ function readDir(status: keyof typeof STATUS_DIRS): { recipes: Recipe[]; warning
   const dir = path.join(COOKING_DIR, 'recipes', STATUS_DIRS[status]);
   const recipes: Recipe[] = [];
   const warnings: string[] = [];
-  // Skip non-.md files — stray .html exports and plating jpgs live alongside the recipes.
-  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.md')).sort()) {
+  // Skip non-.md files — stray .html exports and plating jpgs live alongside
+  // the recipes — and ALL-CAPS workspace docs (IDEAS.md; recipes are
+  // kebab-lowercase, TEMPLATE.md follows the same convention one level up).
+  const files = fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith('.md') && !/^[A-Z0-9_-]+\.md$/.test(f))
+    .sort();
+  for (const file of files) {
     const markdown = fs.readFileSync(path.join(dir, file), 'utf8');
     const result = parseRecipe(markdown, { id: file.replace(/\.md$/, ''), status });
     // Made dishes and cocktail specs are station-first; only to-try queue

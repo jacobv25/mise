@@ -11,6 +11,7 @@ describe('StepRow', () => {
       text: '**Preheat — MEDIUM-HIGH, 2–3 min.** Water-drop test, then add the oil.',
       leadIn: 'Preheat — MEDIUM-HIGH, 2–3 min.',
       heat: 'MEDIUM-HIGH',
+      duration: { minSeconds: 120, maxSeconds: 180, text: '2–3 min' },
     };
     await render(<StepRow step={step} />);
     expect(screen.getByText('3')).toBeOnTheScreen();
@@ -25,6 +26,7 @@ describe('StepRow', () => {
       text: 'Rinse lentils until water runs clear.',
       leadIn: null,
       heat: null,
+      duration: null,
     };
     await render(<StepRow step={step} />);
     expect(screen.getByText('Rinse lentils until water runs clear.')).toBeOnTheScreen();
@@ -37,6 +39,7 @@ describe('StepRow', () => {
       text: '**Brown — MEDIUM-HIGH.** Press flat, then **don’t touch for 3–4 min**.',
       leadIn: 'Brown — MEDIUM-HIGH.',
       heat: 'MEDIUM-HIGH',
+      duration: null,
     };
     await render(<StepRow step={step} />);
     expect(screen.getByText(/don’t touch for 3–4 min/)).toBeOnTheScreen();

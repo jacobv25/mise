@@ -17,13 +17,26 @@
  * never copies whole sections through.
  */
 
-import type { Bowl, Recipe, RecipeStatus, StationExtra, Step } from '../src/types/recipe';
+import type {
+  Bowl,
+  Recipe,
+  RecipeStatus,
+  StationExtra,
+  Step,
+  StepDuration,
+} from '../src/types/recipe';
 
 const CIRCLED_DIGITS = '①②③④⑤⑥⑦⑧⑨⑩';
 
 // Order matters: longer tokens first so MEDIUM-HIGH wins over MEDIUM/HIGH.
 const HEAT_TOKEN_RE =
   /OVEN\s+\d+\s*°?F|MEDIUM-HIGH|MEDIUM-LOW|OFF HEAT|MEDIUM|HIGH|LOW|no heat/;
+
+// "2–3 min", "30–45 sec", "~8 min", "1 hr" — the unit keeps bare numbers
+// (temperatures, step refs) from matching. Range dashes vary in the corpus.
+const DURATION_RE = /~?\s*(\d+)\s*(?:[–—-]\s*(\d+)\s*)?(min(?:ute)?s?|sec(?:ond)?s?|h(?:ou)?rs?)\b/i;
+
+const DURATION_UNIT_SECONDS: Record<string, number> = { s: 1, m: 60, h: 3600 };
 
 const SECTION_KEYS = [
   { key: 'nutrition', re: /^##\s*nutrition/i },
@@ -80,8 +93,17 @@ export function parseRecipe(
 
   const stepNumbers = new Set(steps.map((s) => s.number));
   for (const bowl of bowls) {
-    if (bowl.targetStep !== null && !stepNumbers.has(bowl.targetStep)) {
-      warn(`Bowl ${bowl.index} targets step ${bowl.targetStep}, which is not a numbered step`);
+    for (const target of bowl.targetSteps) {
+      if (!stepNumbers.has(target)) {
+        warn(`Bowl ${bowl.index} targets step ${target}, which is not a numbered step`);
+      }
+    }
+  }
+  for (const extra of stationExtras) {
+    for (const target of extra.targetSteps) {
+      if (!stepNumbers.has(target)) {
+        warn(`"${extra.label}" targets step ${target}, which is not a numbered step`);
+      }
     }
   }
 
@@ -200,18 +222,19 @@ function parseMise(
         (arrowGroup ? label.replace(arrowGroup[0], ' ') : label).replace(/\s+/g, ' ').trim(),
       ).replace(/[,;]$/, '');
       let arrowText = '';
-      let targetStep: number | null = null;
+      let targetSteps: number[] = [];
       if (arrowGroup) {
         arrowText = arrowGroup[1].trim();
-        // The target is the first "step N" after the arrow itself; fall back
-        // to the first "step N" anywhere in the group.
+        // Targets are the "step N" numbers after the arrow itself; fall back
+        // to the whole group when the arrow has none before it.
         const afterArrow = arrowText.slice(arrowText.indexOf('→') + 1);
-        targetStep = firstStepNumber(afterArrow) ?? firstStepNumber(arrowText);
+        targetSteps = stepNumbersIn(afterArrow);
+        if (targetSteps.length === 0) targetSteps = stepNumbersIn(arrowText);
       }
-      if (targetStep === null) {
+      if (targetSteps.length === 0) {
         warn(`Bowl ${index} ("${name}") has no "step N" target in its arrow text`);
       }
-      bowls.push({ index, name, arrowText, targetStep, items: splitDotList(itemsText) });
+      bowls.push({ index, name, arrowText, targetSteps, items: splitDotList(itemsText) });
       continue;
     }
 
@@ -224,16 +247,47 @@ function parseMise(
         (arrowGroup ? rawLabel.replace(arrowGroup[0], ' ') : rawLabel).replace(/\s+/g, ' ').trim(),
       );
       const arrowText = arrowGroup ? arrowGroup[1].replace(/^→\s*/, '').trim() : null;
-      stationExtras.push({ label, arrowText, items: splitDotList(itemsText) });
+      // Same "step N" grammar as bowls, but optional — stove-side cards
+      // legitimately have no landing step.
+      const targetSteps = arrowText ? stepNumbersIn(arrowText) : [];
+      stationExtras.push({ label, arrowText, targetSteps, items: splitDotList(itemsText) });
     }
   }
 
   return { tools, bowls, stationExtras };
 }
 
-function firstStepNumber(text: string): number | null {
-  const m = text.match(/step\s+(\d+)/i);
-  return m ? Number(m[1]) : null;
+/**
+ * Every step number mentioned: "step 5" → [5]; the two-stage plural
+ * "steps 4 & 5" → [4, 5]; separate mentions ("prepped at step 1, poured at
+ * step 3") → [1, 3]. Deduped, in order of appearance.
+ */
+function stepNumbersIn(text: string): number[] {
+  const found: number[] = [];
+  for (const m of text.matchAll(/steps?\s+(\d+(?:\s*(?:[&,]|and)\s*\d+)*)/gi)) {
+    for (const digits of m[1].match(/\d+/g) ?? []) {
+      const n = Number(digits);
+      if (!found.includes(n)) found.push(n);
+    }
+  }
+  return found;
+}
+
+/**
+ * Cook-mode timer for a step: the first duration in the bold lead-in
+ * ("MEDIUM-HIGH, 2–3 min" → 120–180 s). Lead-in only, like heat — durations
+ * in the step body ("second side ~4–5 min") are prose, not the step's timer.
+ */
+export function parseLeadInDuration(leadIn: string | null): StepDuration | null {
+  const m = leadIn?.match(DURATION_RE);
+  if (!m) return null;
+  const perUnit = DURATION_UNIT_SECONDS[m[3][0].toLowerCase()];
+  const minSeconds = Number(m[1]) * perUnit;
+  return {
+    minSeconds,
+    maxSeconds: m[2] ? Number(m[2]) * perUnit : minSeconds,
+    text: m[0].replace(/\s+/g, ' ').trim(),
+  };
 }
 
 function parseSteps(lines: string[], warn: (msg: string) => void): Step[] {
@@ -246,7 +300,7 @@ function parseSteps(lines: string[], warn: (msg: string) => void): Step[] {
     const leadIn = text.match(/^\*\*(.+?)\*\*/)?.[1].trim() ?? null;
     // The token lives inside the bold lead-in, not bolded alone.
     const heat = leadIn?.match(HEAT_TOKEN_RE)?.[0].replace(/\s+/g, ' ') ?? null;
-    steps.push({ number, text, leadIn, heat });
+    steps.push({ number, text, leadIn, heat, duration: parseLeadInDuration(leadIn) });
   }
   if (steps.length === 0) warn('no numbered steps found');
   return steps;

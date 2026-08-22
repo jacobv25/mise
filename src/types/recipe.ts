@@ -26,8 +26,12 @@ export interface Bowl {
   name: string;
   /** Free prose after the arrow, e.g. "pan at step 5, oil first". */
   arrowText: string;
-  /** Step the bowl tips in at — first "step N" in the arrow text. Null only on contract violations. */
-  targetStep: number | null;
+  /**
+   * Steps the bowl lands at, in order of mention — "step N" numbers after
+   * the arrow. Usually one; two-stage bowls carry two ("→ steps 4 & 5").
+   * Empty only on contract violations.
+   */
+  targetSteps: number[];
   /** Ingredient + amount strings, split on the "·" separators. */
   items: string[];
 }
@@ -37,7 +41,23 @@ export interface StationExtra {
   label: string;
   /** Arrow prose if the line had one (garnish plates sometimes do), else null. */
   arrowText: string | null;
+  /**
+   * Steps the card lands at, same grammar as bowls (a garnish plate's
+   * "prepped at step 1, poured at step 3" → [1, 3]). Empty for cards with
+   * no arrow (stove-side) or arrows without a step; unlike bowls, that's
+   * allowed, not a contract violation.
+   */
+  targetSteps: number[];
   items: string[];
+}
+
+/** Timer parsed from a step's bold lead-in, e.g. "2–3 min" → 120–180 s. */
+export interface StepDuration {
+  minSeconds: number;
+  /** Equals minSeconds when the lead-in gives a single value ("~8 min"). */
+  maxSeconds: number;
+  /** The token as written, for display: "~5–6 min", "30–45 sec". */
+  text: string;
 }
 
 export interface Step {
@@ -49,6 +69,8 @@ export interface Step {
   leadIn: string | null;
   /** Heat token found in the lead-in, or null (bowl-less/to-try steps have none). */
   heat: HeatLevel | null;
+  /** First duration in the lead-in (same lead-in-only rule as heat), or null. */
+  duration: StepDuration | null;
 }
 
 export interface Recipe {

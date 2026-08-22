@@ -1,4 +1,4 @@
-import { isZeroProof, parseRecipe } from '../parse-recipe';
+import { isZeroProof, parseLeadInDuration, parseRecipe } from '../parse-recipe';
 
 /**
  * Fixtures are synthetic but shaped exactly like the real `~/cooking` files —
@@ -24,6 +24,7 @@ const MADE_RECIPE = `# Test Skillet (jar-stretch, low-sodium)
   cloves, minced
 - **Bowl ② — Yogurt sauce (stirred at step 1, → bowls at step 5; makes
   ~4 servings):** ¾ cup Greek yogurt · juice of ½ lemon
+- **Bowl ③ — Eggs, two-stage (→ steps 4 & 5):** 2 eggs, fridge-cold
 - **Stove-side:** 1½ tbsp olive oil · 1 lb 93% ground turkey
 - **Side/garnish plate (→ step 5):** 2 tbsp chopped parsley · lemon wedges
 
@@ -91,7 +92,7 @@ describe('parseRecipe — made recipe with mise bowls', () => {
   });
 
   test('bowls: circled digit index, arrow-stripped name, items split on ·', () => {
-    expect(recipe.bowls).toHaveLength(2);
+    expect(recipe.bowls).toHaveLength(3);
     const [sofrito, yogurt] = recipe.bowls;
     expect(sofrito.index).toBe(1);
     expect(sofrito.name).toBe('Sofrito');
@@ -101,17 +102,23 @@ describe('parseRecipe — made recipe with mise bowls', () => {
     expect(yogurt.name).toBe('Yogurt sauce');
   });
 
-  test('bowl target is the first "step N" after the arrow, not before it', () => {
-    const [sofrito, yogurt] = recipe.bowls;
-    expect(sofrito.targetStep).toBe(3);
+  test('bowl targets come from after the arrow; "steps 4 & 5" lands at both', () => {
+    const [sofrito, yogurt, eggs] = recipe.bowls;
+    expect(sofrito.targetSteps).toEqual([3]);
     // "(stirred at step 1, → bowls at step 5)" — target is 5, not 1.
-    expect(yogurt.targetStep).toBe(5);
+    expect(yogurt.targetSteps).toEqual([5]);
+    // The two-stage plural from the ramen recipes.
+    expect(eggs.targetSteps).toEqual([4, 5]);
   });
 
   test('stove-side and garnish lines become station extras, not bowls', () => {
     expect(recipe.stationExtras.map((e) => e.label)).toEqual(['Stove-side', 'Side/garnish plate']);
     expect(recipe.stationExtras[0].arrowText).toBeNull();
     expect(recipe.stationExtras[1].arrowText).toBe('step 5');
+  });
+
+  test('extras get targetSteps from their arrow; arrow-less stove-side stays empty', () => {
+    expect(recipe.stationExtras.map((e) => e.targetSteps)).toEqual([[], [5]]);
   });
 
   test('steps: numbers, bold lead-ins, wrapped lines joined', () => {
@@ -127,6 +134,16 @@ describe('parseRecipe — made recipe with mise bowls', () => {
       'MEDIUM', // first token wins over the later MEDIUM-LOW
       'OFF HEAT',
       null, // "**Plate.**" has no token
+    ]);
+  });
+
+  test('durations: range, single value, and lead-ins without one', () => {
+    expect(recipe.steps.map((s) => s.duration)).toEqual([
+      { minSeconds: 480, maxSeconds: 480, text: '~8 min' },
+      { minSeconds: 120, maxSeconds: 180, text: '2–3 min' },
+      { minSeconds: 900, maxSeconds: 900, text: '15 min' },
+      null, // "Balance — OFF HEAT." has no duration
+      null, // "Plate."
     ]);
   });
 
@@ -169,6 +186,8 @@ describe('parseRecipe — bowl-less to-try recipe', () => {
     expect(recipe.steps).toHaveLength(2);
     expect(recipe.steps.every((s) => s.heat === null)).toBe(true);
     expect(recipe.steps.every((s) => s.leadIn === null)).toBe(true);
+    // "6–7 min" in the body prose is not a lead-in duration.
+    expect(recipe.steps.every((s) => s.duration === null)).toBe(true);
   });
 
   test('parses clean with no warnings', () => {
@@ -214,9 +233,19 @@ describe('parseRecipe — cocktail spec from the bar track', () => {
     expect(recipe.status).toBe('cocktail');
     expect(recipe.tools).toHaveLength(3);
     expect(recipe.bowls.map((b) => b.name)).toEqual(['The tin, liquids only', 'Shaking ice']);
-    expect(recipe.bowls.map((b) => b.targetStep)).toEqual([1, 2]);
+    expect(recipe.bowls.map((b) => b.targetSteps)).toEqual([[1], [2]]);
     expect(recipe.stationExtras.map((e) => e.label)).toEqual(['Glass station']);
     expect(recipe.stationExtras[0].arrowText).toBe('prepped at step 1, poured at step 3');
+    // Separate "step N" mentions each count — the glass is touched twice.
+    expect(recipe.stationExtras[0].targetSteps).toEqual([1, 3]);
+  });
+
+  test('the shake timer parses as a seconds duration', () => {
+    expect(recipe.steps.map((s) => s.duration)).toEqual([
+      null,
+      { minSeconds: 12, maxSeconds: 12, text: '12 seconds' },
+      null,
+    ]);
   });
 
   test('no burner anywhere: every step has null heat (SHAKE is not a token)', () => {
@@ -250,6 +279,20 @@ describe('parseRecipe — contract violations surface as warnings', () => {
 `;
     const { warnings } = parseRecipe(md, { id: 'broken', status: 'made' });
     expect(warnings.some((w) => w.includes('targets step 9'))).toBe(true);
+  });
+
+  test('station extra targeting a nonexistent step warns', () => {
+    const md = `# Broken
+
+## Mise en place
+- **Bowl ① — Sofrito (→ pan at step 1):** onion
+- **Side/garnish plate (→ step 7):** parsley
+
+## Steps
+1. **Only step.** Do the thing.
+`;
+    const { warnings } = parseRecipe(md, { id: 'broken', status: 'made' });
+    expect(warnings.some((w) => w.includes('"Side/garnish plate" targets step 7'))).toBe(true);
   });
 
   test('bowl with no "step N" in its arrow text warns', () => {
@@ -344,11 +387,36 @@ describe('parseRecipe — zero-proof spec parses like its alcoholic sibling', ()
 
   test('parses clean, and the cuisine line flags it for the mocktail split', () => {
     expect(warnings).toEqual([]);
-    expect(recipe.bowls.map((b) => b.targetStep)).toEqual([1, 2]);
+    expect(recipe.bowls.map((b) => b.targetSteps)).toEqual([[1], [2]]);
     expect(isZeroProof(recipe.cuisine)).toBe(true);
   });
 
   test('the 0.0 alcohol guardrail stays out of the export like any other', () => {
     expect(JSON.stringify(recipe)).not.toContain('guardrail prose');
+  });
+});
+
+describe('parseLeadInDuration — corpus spellings beyond the fixtures', () => {
+  test('unit variants normalize to seconds', () => {
+    expect(parseLeadInDuration('Simmer — LOW, 1 hr.')).toEqual({
+      minSeconds: 3600,
+      maxSeconds: 3600,
+      text: '1 hr',
+    });
+    expect(parseLeadInDuration('Rest — no heat, 5 mins.')).toEqual({
+      minSeconds: 300,
+      maxSeconds: 300,
+      text: '5 mins',
+    });
+  });
+
+  test('first duration wins; temperatures and bare numbers never match', () => {
+    expect(parseLeadInDuration('Sear — MEDIUM-HIGH, ~5–6 min, flip, then 4–5 min.')).toEqual({
+      minSeconds: 300,
+      maxSeconds: 360,
+      text: '~5–6 min',
+    });
+    expect(parseLeadInDuration('Roast — OVEN 425°F until blistered.')).toBeNull();
+    expect(parseLeadInDuration(null)).toBeNull();
   });
 });

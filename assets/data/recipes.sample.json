@@ -29,7 +29,9 @@
         "index": 1,
         "name": "Lemony yogurt",
         "arrowText": "stirred at step 2, → bowls at step 7",
-        "targetStep": 7,
+        "targetSteps": [
+          7
+        ],
         "items": [
           "¾ cup plain Greek yogurt",
           "1 Tbsp fresh lemon juice"
@@ -39,7 +41,9 @@
         "index": 2,
         "name": "Lemony salad",
         "arrowText": "tossed at step 2, → on top at step 7",
-        "targetStep": 7,
+        "targetSteps": [
+          7
+        ],
         "items": [
           "½ cucumber, thinly sliced",
           "a little thin-sliced onion",
@@ -51,7 +55,9 @@
         "index": 3,
         "name": "Chickpeas",
         "arrowText": "→ pan at step 4",
-        "targetStep": 4,
+        "targetSteps": [
+          4
+        ],
         "items": [
           "1 15-oz can chickpeas (no-salt-added), rinsed and patted very dry"
         ]
@@ -60,7 +66,9 @@
         "index": 4,
         "name": "Bloom",
         "arrowText": "→ cleared spot in pan at step 5",
-        "targetStep": 5,
+        "targetSteps": [
+          5
+        ],
         "items": [
           "1 garlic clove, grated",
           "1½ tsp ground cumin (a little extra stands in for the original's coriander)"
@@ -70,7 +78,9 @@
         "index": 5,
         "name": "Kale",
         "arrowText": "→ pan at step 6",
-        "targetStep": 6,
+        "targetSteps": [
+          6
+        ],
         "items": [
           "1 small bunch kale, stems stripped, torn large"
         ]
@@ -80,6 +90,7 @@
       {
         "label": "Stove-side",
         "arrowText": null,
+        "targetSteps": [],
         "items": [
           "~3 Tbsp extra-virgin olive oil, divided (2 Tbsp at step 3, a little at step 5, thread to finish)",
           "lime squeeze to finish",
@@ -93,43 +104,74 @@
         "number": 1,
         "text": "**Mise — no heat (~15 min).** Work the bowl map above — everything prepped and beside the stove before heat goes on. **Reset before ignition:** dump the garbage bowl, wash knife & board, wipe the counter. Once the burner clicks on, the knife is done.",
         "leadIn": "Mise — no heat (~15 min).",
-        "heat": "no heat"
+        "heat": "no heat",
+        "duration": {
+          "minSeconds": 900,
+          "maxSeconds": 900,
+          "text": "~15 min"
+        }
       },
       {
         "number": 2,
         "text": "**Sauces — no heat (~2 min).** Stir Bowl ① (yogurt + lemon). Toss Bowl ② (cucumber, onion, parsley + lemon).",
         "leadIn": "Sauces — no heat (~2 min).",
-        "heat": "no heat"
+        "heat": "no heat",
+        "duration": {
+          "minSeconds": 120,
+          "maxSeconds": 120,
+          "text": "~2 min"
+        }
       },
       {
         "number": 3,
         "text": "**Preheat — MEDIUM-HIGH (~2 min).** Empty stainless pan until a water drop skates; add 2 Tbsp olive oil, swirl to a shimmer.",
         "leadIn": "Preheat — MEDIUM-HIGH (~2 min).",
-        "heat": "MEDIUM-HIGH"
+        "heat": "MEDIUM-HIGH",
+        "duration": {
+          "minSeconds": 120,
+          "maxSeconds": 120,
+          "text": "~2 min"
+        }
       },
       {
         "number": 4,
         "text": "**Crisp the chickpeas — stay on MEDIUM-HIGH (8–10 min).** Bowl ③ in a single layer; leave 2–3 min between stirs. Done when: deep golden, skins splitting, rattly-sounding. *Dead minutes: rinse the colander and board, set out the 2 serving bowls.*",
         "leadIn": "Crisp the chickpeas — stay on MEDIUM-HIGH (8–10 min).",
-        "heat": "MEDIUM-HIGH"
+        "heat": "MEDIUM-HIGH",
+        "duration": {
+          "minSeconds": 480,
+          "maxSeconds": 600,
+          "text": "8–10 min"
+        }
       },
       {
         "number": 5,
         "text": "**Bloom — drop to MEDIUM (30–45 sec).** Bowl ④ (cumin + garlic) in a little oil in a cleared spot until fragrant, then stir through (garlic goes in late so it doesn't burn).",
         "leadIn": "Bloom — drop to MEDIUM (30–45 sec).",
-        "heat": "MEDIUM"
+        "heat": "MEDIUM",
+        "duration": {
+          "minSeconds": 30,
+          "maxSeconds": 45,
+          "text": "30–45 sec"
+        }
       },
       {
         "number": 6,
         "text": "**Kale — stay on MEDIUM (2–3 min).** Bowl ⑤ in; toss until wilted with crisp edges. **OFF HEAT**, squeeze of lime.",
         "leadIn": "Kale — stay on MEDIUM (2–3 min).",
-        "heat": "MEDIUM"
+        "heat": "MEDIUM",
+        "duration": {
+          "minSeconds": 120,
+          "maxSeconds": 180,
+          "text": "2–3 min"
+        }
       },
       {
         "number": 7,
         "text": "**Plate — no heat.** Yogurt down, chickpea-kale over, lemony salad on top, thread of olive oil.",
         "leadIn": "Plate — no heat.",
-        "heat": "no heat"
+        "heat": "no heat",
+        "duration": null
       }
     ]
   },
@@ -160,7 +202,9 @@
         "index": 1,
         "name": "Sofrito",
         "arrowText": "→ pan at step 5",
-        "targetStep": 5,
+        "targetSteps": [
+          5
+        ],
         "items": [
           "½ yellow onion, chopped",
           "2 garlic cloves, minced"
@@ -170,7 +214,9 @@
         "index": 2,
         "name": "Spices",
         "arrowText": "→ pan at step 5, on the aromatics",
-        "targetStep": 5,
+        "targetSteps": [
+          5
+        ],
         "items": [
           "1 tsp dried oregano",
           "¼ tsp chili flakes",
@@ -181,7 +227,9 @@
         "index": 3,
         "name": "Tomatoes",
         "arrowText": "→ pan at step 6",
-        "targetStep": 6,
+        "targetSteps": [
+          6
+        ],
         "items": [
           "1 cup jarred marinara (the open jar — measure it, don't pour free)",
           "1 can (14.5 oz) no-salt-added tomatoes, hand-crushed"
@@ -191,7 +239,9 @@
         "index": 4,
         "name": "Finish",
         "arrowText": "→ plating, step 9",
-        "targetStep": 9,
+        "targetSteps": [
+          9
+        ],
         "items": [
           "2 tbsp part-skim ricotta per bowl",
           "2 tbsp chopped parsley",
@@ -203,6 +253,7 @@
       {
         "label": "Stove-side",
         "arrowText": null,
+        "targetSteps": [],
         "items": [
           "1½ tbsp olive oil",
           "1 lb 93% ground turkey (straight from fridge pack)",
@@ -216,55 +267,92 @@
         "number": 1,
         "text": "**Mise — set the station (no heat, ~2 min).** Garbage bowl, damp towel under board, hand towel, landing plate. Read the steps through. Once the burner clicks on, the knife is done.",
         "leadIn": "Mise — set the station (no heat, ~2 min).",
-        "heat": "no heat"
+        "heat": "no heat",
+        "duration": {
+          "minSeconds": 120,
+          "maxSeconds": 120,
+          "text": "~2 min"
+        }
       },
       {
         "number": 2,
         "text": "**Mise — fill the bowls (no heat, ~8 min).** Work the map above; line bowls up ① → ④. **Reset before ignition:** dump garbage bowl, wash knife & board, wipe counter.",
         "leadIn": "Mise — fill the bowls (no heat, ~8 min).",
-        "heat": "no heat"
+        "heat": "no heat",
+        "duration": {
+          "minSeconds": 480,
+          "maxSeconds": 480,
+          "text": "~8 min"
+        }
       },
       {
         "number": 3,
         "text": "**Preheat — MEDIUM-HIGH, empty stainless pan, 2–3 min.** Water-drop test: bead-and-skitter. Add the olive oil, wait for a full shimmer. *Dead minute: fill the sink with hot soapy water.*",
         "leadIn": "Preheat — MEDIUM-HIGH, empty stainless pan, 2–3 min.",
-        "heat": "MEDIUM-HIGH"
+        "heat": "MEDIUM-HIGH",
+        "duration": {
+          "minSeconds": 120,
+          "maxSeconds": 180,
+          "text": "2–3 min"
+        }
       },
       {
         "number": 4,
         "text": "**Brown the turkey — stay on MEDIUM-HIGH, ~5–6 min.** Add the turkey and press it into one flat layer with the spoon — then **don't touch for 3–4 min**. You want a deep brown crust underneath (that's fond forming — flavor, not burning). Then crumble into bite-size pieces and cook 2 min more. Done when: no pink, brown crusty bits on the pan bottom.",
         "leadIn": "Brown the turkey — stay on MEDIUM-HIGH, ~5–6 min.",
-        "heat": "MEDIUM-HIGH"
+        "heat": "MEDIUM-HIGH",
+        "duration": {
+          "minSeconds": 300,
+          "maxSeconds": 360,
+          "text": "~5–6 min"
+        }
       },
       {
         "number": 5,
         "text": "**Aromatics — drop to MEDIUM, ~3–4 min.** Onion into the turkey, stir until it softens and picks up color. Garlic + the spice bowl in, stir 30–60 sec until fragrant — not brown.",
         "leadIn": "Aromatics — drop to MEDIUM, ~3–4 min.",
-        "heat": "MEDIUM"
+        "heat": "MEDIUM",
+        "duration": {
+          "minSeconds": 180,
+          "maxSeconds": 240,
+          "text": "~3–4 min"
+        }
       },
       {
         "number": 6,
         "text": "**Tomatoes — stay on MEDIUM to a bubble, then MEDIUM-LOW, 15 min.** Pour in bowl ③, scrape the fond up off the bottom (it dissolves into the sauce). Lazy simmer, lid off, stirring occasionally, until it thickens to spoon-track. *Dead minutes: wash the board & spoon rest, set out meal-prep containers.*",
         "leadIn": "Tomatoes — stay on MEDIUM to a bubble, then MEDIUM-LOW, 15 min.",
-        "heat": "MEDIUM"
+        "heat": "MEDIUM",
+        "duration": {
+          "minSeconds": 900,
+          "maxSeconds": 900,
+          "text": "15 min"
+        }
       },
       {
         "number": 7,
         "text": "**Pasta in — stay on MEDIUM-LOW, ~2 min.** Fold the cooked pasta in with a splash of water to loosen; toss until the pasta is hot and glossed with sauce.",
         "leadIn": "Pasta in — stay on MEDIUM-LOW, ~2 min.",
-        "heat": "MEDIUM-LOW"
+        "heat": "MEDIUM-LOW",
+        "duration": {
+          "minSeconds": 120,
+          "maxSeconds": 120,
+          "text": "~2 min"
+        }
       },
       {
         "number": 8,
         "text": "**Balance — OFF HEAT.** Taste. Flat? A small splash of balsamic and a grind of pepper — never salt; the jar already brought it.",
         "leadIn": "Balance — OFF HEAT.",
-        "heat": "OFF HEAT"
+        "heat": "OFF HEAT",
+        "duration": null
       },
       {
         "number": 9,
         "text": "**Plate.** Shallow bowl, mound high in the center. One dollop (2 tbsp) ricotta on top — don't stir it in, let it melt streaky. Parsley from height, wipe the rim. Remaining 3 portions into containers (fridge 3–4 days; the sauce alone also freezes well).",
         "leadIn": "Plate.",
-        "heat": null
+        "heat": null,
+        "duration": null
       }
     ]
   },
@@ -298,31 +386,36 @@
         "number": 1,
         "text": "Rinse lentils until water runs clear.",
         "leadIn": null,
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 2,
         "text": "Sweat onion/carrot/celery in oil over medium-high, 6–7 min (skill: aromatics without burning).",
         "leadIn": null,
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 3,
         "text": "Stir in garlic, cumin, cinnamon — 60 seconds until fragrant. Add lentils, toast 1–2 min.",
         "leadIn": null,
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 4,
         "text": "Add liquid + lemon juice; boil, then simmer low **30–45 min** until lentils are tender.",
         "leadIn": null,
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 5,
         "text": "Stir in kale to wilt. Taste: brighten with more lemon + pepper, not salt.",
         "leadIn": null,
-        "heat": null
+        "heat": null,
+        "duration": null
       }
     ]
   },
@@ -355,7 +448,9 @@
         "index": 1,
         "name": "The tin, liquids only — NO ice yet",
         "arrowText": "→ built in the small tin at step 3, cheapest first",
-        "targetStep": 3,
+        "targetSteps": [
+          3
+        ],
         "items": [
           "¼ oz (7.5 ml) simple syrup, cold",
           "¾ oz (22 ml) fresh lime juice — squeezed 1–4 h ahead if you can (detail #1)",
@@ -367,7 +462,9 @@
         "index": 2,
         "name": "Shaking ice",
         "arrowText": "→ large tin at step 5, only after the straw-taste",
-        "targetStep": 5,
+        "targetSteps": [
+          5
+        ],
         "items": [
           "ice to fill the large tin ⅔ full — 5–6 standard cubes or 2 big cubes",
           "waits in the freezer until the moment of the shake, never sitting out melting"
@@ -378,6 +475,10 @@
       {
         "label": "Glass station",
         "arrowText": "prepped at step 1, poured at step 7",
+        "targetSteps": [
+          1,
+          7
+        ],
         "items": [
           "rocks glass → freezer ≥10 min",
           "fresh serving ice for the pour, biggest cubes you have — separate from the shaking ice",
@@ -388,6 +489,7 @@
       {
         "label": "Made ahead — simple syrup",
         "arrowText": null,
+        "targetSteps": [],
         "items": [
           "100 g sugar + 100 g water in the small pan over low heat",
           "stir just until fully clear (~3 min), never boil — boiling evaporates water and silently changes the 1-to-1 ratio",
@@ -402,55 +504,72 @@
         "number": 1,
         "text": "**Chill the glass (freezer, ≥10 min).** ⏱ *Dead minutes — use them:* roll limes hard under your palm (bursts juice vesicles, +20% yield), halve, squeeze ~1–1½ limes, pick out seeds. Cut one thin center wheel for garnish. Ideally this happened 1–4 h ago.",
         "leadIn": "Chill the glass (freezer, ≥10 min).",
-        "heat": null
+        "heat": null,
+        "duration": {
+          "minSeconds": 600,
+          "maxSeconds": 600,
+          "text": "10 min"
+        }
       },
       {
         "number": 2,
         "text": "**(If rimming) Salt the HALF rim now, on the empty cold glass.** Wedge-wipe the *outside* of half the rim, roll that edge through the salt plate. Outside only — salt inside the rim falls in and you can't undo it. Return glass to freezer.",
         "leadIn": "(If rimming) Salt the HALF rim now, on the empty cold glass.",
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 3,
         "text": "**Build the liquids in the small tin, cheapest first:** syrup ¼ oz → lime ¾ oz → Cointreau ¾ oz → tequila 2 oz. (Cheap-first habit: a mis-measure gets dumped before the expensive pour.) Read the jigger at eye level; a ¼-oz miss is a different drink.",
         "leadIn": "Build the liquids in the small tin, cheapest first:",
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 4,
         "text": "**Straw-taste the raw build.** Dip a straw, finger over the top, taste. It should read too strong and too intense — the shake's job is to fix exactly that. This is calibration: remember this taste to compare post-shake.",
         "leadIn": "Straw-taste the raw build.",
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 5,
         "text": "**Ice the large tin ⅔ full, seal the tins at a slight angle, burp-tap to lock.** Small tin on top. Grip both ends.",
         "leadIn": "Ice the large tin ⅔ full, seal the tins at a slight angle, burp-tap to lock.",
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 6,
         "text": "**SHAKE — hard, 12 seconds on a phone timer.** Not a rock, a piston: the ice should slam both ends of the tin. By ~12 s the drink hits thermal equilibrium (–5 to –8 °C, ~25% dilution) and more shaking changes almost nothing — vigor matters, duration past 12–15 s doesn't. The big tin will frost and hurt to hold. That's done.",
         "leadIn": "SHAKE — hard, 12 seconds on a phone timer.",
-        "heat": null
+        "heat": null,
+        "duration": {
+          "minSeconds": 12,
+          "maxSeconds": 12,
+          "text": "12 seconds"
+        }
       },
       {
         "number": 7,
         "text": "**Crack the seal (heel of hand where the tins meet), Hawthorne-strain into the chilled glass over FRESH ice.** Never the shaking ice — it's spent, cracked, and fast-melting; it would blow past the 25% dilution target in minutes.",
         "leadIn": "Crack the seal (heel of hand where the tins meet), Hawthorne-strain into the chilled glass over FRESH ice.",
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 8,
         "text": "**Balance check (the skill rep):** straw-taste what's left in the tin. Too tart → next time +¼ oz syrup. Too sweet → +¼ oz lime. Flabby/watery → shake was too long or ice sat out. Log the verdict.",
         "leadIn": "Balance check (the skill rep):",
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 9,
         "text": "**Plate.** Rocks glass on a coaster, salt-rim (if used) facing away from you so you choose salt sip-by-sip. Lime wheel perched on the clean side of the rim. Wipe any drips off the glass wall. **Tall glass of water alongside — always.** Sip at the 0-minute and 10-minute mark and notice the drink change as the big cubes slowly open it up.",
         "leadIn": "Plate.",
-        "heat": null
+        "heat": null,
+        "duration": null
       }
     ]
   },
@@ -478,7 +597,9 @@
         "index": 1,
         "name": "Serving ice",
         "arrowText": "→ into the collins glass at step 1, before anything else",
-        "targetStep": 1,
+        "targetSteps": [
+          1
+        ],
         "items": [
           "ice to fill the glass to the rim — the biggest cubes you have",
           "waits in the freezer until the moment of the pour, never sitting out melting"
@@ -488,7 +609,9 @@
         "index": 2,
         "name": "The pour, liquids only",
         "arrowText": "→ built straight in the glass at step 2, lime first",
-        "targetStep": 2,
+        "targetSteps": [
+          2
+        ],
         "items": [
           "½ oz (15 ml) fresh lime juice — one lime, rolled hard before squeezing",
           "3 oz (90 ml) black cherry soda, fridge-cold",
@@ -500,6 +623,10 @@
       {
         "label": "Glass station",
         "arrowText": "prepped at step 1, garnished at step 4",
+        "targetSteps": [
+          1,
+          4
+        ],
         "items": [
           "collins or highball glass → freezer ≥10 min",
           "garnish — 1 lime wheel, cut while the glass chills",
@@ -513,25 +640,29 @@
         "number": 1,
         "text": "**Pull the cold glass and fill it with ice to the rim.** A half-filled glass melts twice as fast — the ice is insulation, not decoration. Cut the lime wheel now, in the dead seconds.",
         "leadIn": "Pull the cold glass and fill it with ice to the rim.",
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 2,
         "text": "**Build in the glass, lime first:** ½ oz lime → 3 oz cherry soda → 3 oz soda water. Lime first means you can straw-taste and correct before the bubbles are in. Pour the sodas down the bar spoon to keep the carbonation.",
         "leadIn": "Build in the glass, lime first:",
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 3,
         "text": "**One gentle stir — bottom to top, once.** Carbonation is an ingredient; every extra stir spends some. If it reads sweet-first, add another ¼ oz lime — a rickey is tart-forward or it is just soda.",
         "leadIn": "One gentle stir — bottom to top, once.",
-        "heat": null
+        "heat": null,
+        "duration": null
       },
       {
         "number": 4,
         "text": "**Plate.** Lime wheel on the rim, cherry dropped to the bottom. Wipe the glass wall, coaster underneath. Sip it while it is loud — a rickey is at its best in the first five minutes.",
         "leadIn": "Plate.",
-        "heat": null
+        "heat": null,
+        "duration": null
       }
     ]
   }

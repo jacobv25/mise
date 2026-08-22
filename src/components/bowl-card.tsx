@@ -33,9 +33,9 @@ export function BowlCard({ bowl, checked, onToggle }: BowlCardProps) {
           </ThemedText>
           <View style={styles.headerText}>
             <ThemedText type="smallBold">{bowl.name}</ThemedText>
-            {bowl.targetStep !== null && (
+            {bowl.targetSteps.length > 0 && (
               <ThemedText type="small" themeColor="textSecondary">
-                → step {bowl.targetStep}
+                → step{bowl.targetSteps.length > 1 ? 's' : ''} {bowl.targetSteps.join(' & ')}
               </ThemedText>
             )}
           </View>

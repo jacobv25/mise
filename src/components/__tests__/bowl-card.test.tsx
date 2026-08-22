@@ -7,7 +7,7 @@ const BOWL: Bowl = {
   index: 2,
   name: 'Spices',
   arrowText: '→ pan at step 5, on the aromatics',
-  targetStep: 5,
+  targetSteps: [5],
   items: ['1 tsp dried oregano', '¼ tsp chili flakes'],
 };
 
@@ -35,9 +35,16 @@ describe('BowlCard', () => {
     expect(screen.getByText('✓')).toBeOnTheScreen();
   });
 
+  test('pluralizes a two-stage bowl\'s targets ("→ steps 4 & 5")', async () => {
+    await render(
+      <BowlCard bowl={{ ...BOWL, targetSteps: [4, 5] }} checked={false} onToggle={jest.fn()} />,
+    );
+    expect(screen.getByText('→ steps 4 & 5')).toBeOnTheScreen();
+  });
+
   test('omits the step target when the bowl has none (contract-violation tolerance)', async () => {
     await render(
-      <BowlCard bowl={{ ...BOWL, targetStep: null }} checked={false} onToggle={jest.fn()} />,
+      <BowlCard bowl={{ ...BOWL, targetSteps: [] }} checked={false} onToggle={jest.fn()} />,
     );
     expect(screen.queryByText(/→ step/)).toBeNull();
   });
