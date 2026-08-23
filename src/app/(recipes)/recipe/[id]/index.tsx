@@ -1,5 +1,5 @@
 import { useKeepAwake } from 'expo-keep-awake';
-import { Link, Stack, useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { Pressable, ScrollView, StyleSheet, View } from 'react-native';
 
 import { BowlCard } from '@/components/bowl-card';
@@ -18,6 +18,7 @@ export default function RecipeDetailScreen() {
   useKeepAwake();
 
   const theme = useTheme();
+  const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const recipe = recipes.find((r) => r.id === id);
   const { checked, toggle } = useCookingSession(id ?? 'unknown');
@@ -52,19 +53,23 @@ export default function RecipeDetailScreen() {
         </View>
 
         {recipe.steps.length > 0 && (
-          <Link href={{ pathname: '/recipe/[id]/cook', params: { id: recipe.id } }} asChild>
-            <Pressable
-              accessibilityRole="button"
-              style={({ pressed }) => [
-                styles.cookButton,
-                { backgroundColor: theme.text },
-                pressed && styles.pressed,
-              ]}>
-              <ThemedText type="smallBold" style={[styles.cookLabel, { color: theme.background }]}>
-                Start cooking
-              </ThemedText>
-            </Pressable>
-          </Link>
+          // Plain Pressable + router.push, NOT <Link asChild>: asChild's
+          // prop merge clobbers a function-form style, leaving the button
+          // tappable but unstyled (background-on-background label).
+          <Pressable
+            onPress={() =>
+              router.push({ pathname: '/recipe/[id]/cook', params: { id: recipe.id } })
+            }
+            accessibilityRole="button"
+            style={({ pressed }) => [
+              styles.cookButton,
+              { backgroundColor: theme.text },
+              pressed && styles.pressed,
+            ]}>
+            <ThemedText type="smallBold" style={[styles.cookLabel, { color: theme.background }]}>
+              Start cooking
+            </ThemedText>
+          </Pressable>
         )}
 
         {hasMise ? (
