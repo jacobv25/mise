@@ -68,7 +68,7 @@ Expo SDK 57 · React Native 0.86 · React 19 · TypeScript (strict) · expo-rout
 ```bash
 npm install        # postinstall seeds assets/data/ from the committed samples
 npm start          # Expo dev server (Expo Go or a dev build)
-npm test           # 36 tests: parser contract + components + hooks
+npm test           # 72 tests: parser contract + components + hooks
 npm run typecheck && npm run lint
 npm run export-data  # only with the private workspace present (COOKING_DIR env to point elsewhere)
 ```
