@@ -1,5 +1,7 @@
 # mise
 
+[![CI](https://github.com/jacobv25/mise/actions/workflows/ci.yml/badge.svg)](https://github.com/jacobv25/mise/actions/workflows/ci.yml)
+
 A React Native cooking companion for the kitchen counter — recipes, mise-en-place
 checklists, and a pantry inventory, all sourced from a plain-markdown cooking
 workspace and bundled into the app at build time.
